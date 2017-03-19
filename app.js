@@ -1,19 +1,29 @@
 var express = require('express');
 var app = express();
+var config = require("./config");
+var mongoose = require("mongoose");
+var controller = require('./controller')
 
-//Port for the local server
+
 app.set('port', (process.env.PORT || 3000));
 
-//View engine for html & javascript(We can check which one Chris recommends)
 app.set('view engine', 'ejs');
 
-//For our css and javascript files
 app.use('/public', express.static(__dirname + '/public'));
 
-//Renders our home page
 app.get('/',function(req,res){
     res.render('home');
 })
+
+mongoose.connect(config.getDbConnectionString(),function(err){
+    if(err){
+        console.log("Error: " + err);
+    } else{
+        console.log("Database Connected!");
+    }
+});
+
+controller(app);
 
 //localhost:3000
 app.listen(app.get('port'), function() {
