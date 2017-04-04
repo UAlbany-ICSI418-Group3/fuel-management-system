@@ -1,0 +1,15 @@
+
+<h1>Fuel</h1>
+
+<h3><a href="/fuels/new">Create New Fuel</a></h3>
+
+    <div class ="row text-center">
+        <% fuels.forEach(function(fuel){%>
+            <div class="col-md-3 col-sm-6">
+                 <h4>fuel id: <%= fuel.id%></h4>
+                 <h4>fuel type: <%= fuel.type%></h4>
+                 <h4>fuel amount: <%= fuel.amount%></h4>
+                 <br />
+            </div>
+        <% }); %>
+    </div>
