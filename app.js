@@ -2,8 +2,7 @@ var express = require('express');
 var app = express();
 var config = require("./config");
 var mongoose = require("mongoose");
-var controller = require('./controller')
-
+var controller = require('./controller');
 
 app.set('port', (process.env.PORT || 3000));
 
@@ -12,7 +11,7 @@ app.set('view engine', 'ejs');
 app.use('/public', express.static(__dirname + '/public'));
 
 app.get('/',function(req,res){
-    res.render('home');
+    res.render('login');
 })
 
 
