@@ -15,6 +15,8 @@ app.get('/',function(req,res){
     res.render('home');
 })
 
+
+
 mongoose.connect(config.getDbConnectionString(),function(err){
     if(err){
         console.log("Error: " + err);
