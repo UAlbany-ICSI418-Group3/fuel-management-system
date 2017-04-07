@@ -14,6 +14,28 @@ module.exports = function(app){
       res.render("login")
     })
 
+    app.get("/customer",function(req,res){
+      res.render("customer")
+    })
+
+    app.get("/delivery",function(req,res){
+      res.render("delivery")
+    })
+
+    app.get("/orders",function(req,res){
+      res.render("orders")
+    })
+
+    app.get("/inventorymang",function(req,res){
+      res.render("inventorymang")
+    })
+
+      app.get("/inventory",function(req,res){
+      res.render("inventory")
+    })
+
+
+
     //Get a all fuel types
      app.get('/fuels', function(req,res){
        //Get all fuel from DB
