@@ -8,3 +8,10 @@
 4. cd into your working directory
 5. Install dependencies (npm install)
 6. Start the server 👍 ```nodemon app.js```
+
+
+MongoLab: 
+
+user: csi418-3
+account: CSI418
+password: password1
