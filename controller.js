@@ -1,5 +1,6 @@
 var Fuel = require('./models/fuelModel.js');
 var bodyParser = require('body-parser');
+var Order = require("./models/orderModel.js");
 
 module.exports = function(app){
 
@@ -23,8 +24,13 @@ module.exports = function(app){
     })
 
     app.get("/orders",function(req,res){
-      res.render("orders")
-    })
+      Order.getOrders(function(err, orders){
+        if(err){
+            throw err;
+          }
+          res.json(orders);
+      })
+    });
 
     app.get("/inventorymang",function(req,res){
       res.render("inventorymang")
@@ -48,7 +54,7 @@ module.exports = function(app){
     });
     });
 
-    //Create a new type of fuel
+    //POST - Create new Fuel type
     app.post('/fuels',function(req,res){
 
         var newFuel= Fuel({
@@ -59,6 +65,24 @@ module.exports = function(app){
         newFuel.save(function(err){
             if(err)throw err;
             res.redirect("/fuels");
+        });
+    });
+
+    // POST - Create New Order
+    app.post('/customer',function(req,res){
+
+        var newOrder= Order({
+            Date : req.body.date,
+            Address: req.body.address,
+            City : req.body.city,
+            State : req.body.state,
+            Zip : req.body.zip,
+            Type : req.body.type,
+        });
+
+        newOrder.save(function(err){
+            if(err)throw err;
+            res.redirect("/orders");
         });
     });
 
