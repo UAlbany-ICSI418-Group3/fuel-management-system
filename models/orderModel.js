@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var orderSchema = mongoose.Schema({
+var orderSchema = new mongoose.Schema({
 
 	Date: String,
 	Address: String,

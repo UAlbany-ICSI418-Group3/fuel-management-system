@@ -12,18 +12,23 @@ module.exports = function(app){
         res.render('home');
     })
 
+    // GET - Renders loging page
     app.get("/login",function(req,res){
       res.render("login")
     })
 
+    // GET - Renders Customer page
     app.get("/customer",function(req,res){
       res.render("customer")
     })
 
+    // GET - Renders Deliverymans page
     app.get("/delivery",function(req,res){
       res.render("delivery")
     })
-        app.get("/orders",function(req,res){
+
+    // GET - Renders Orders page
+    app.get("/orders",function(req,res){
       res.render("orders")
     })
 
@@ -37,26 +42,24 @@ module.exports = function(app){
       })
     });
 
+    // GET - Renders Inventory Manager page
     app.get("/inventorymang",function(req,res){
       res.render("inventorymang")
     })
 
+    // GET - Renders Inventory page
       app.get("/inventory",function(req,res){
       res.render("inventory")
     })
 
-
-
-    //Get a all fuel types
-     app.get('/fuels', function(req,res){
-       //Get all fuel from DB
-     Fuel.find({}, function(err, allFuels){
-       if(err){
-           console.log(err);
-       } else{
-           res.render("index", {fuels:allFuels});
-       }
-    });
+    //GET - Retreive all fuel types in DB
+    app.get("/fuelData",function(req,res){
+      Fuel.getFuels(function(err, fuels){
+        if(err){
+            throw err;
+          }
+          res.json(fuels);
+      })
     });
 
     //POST - Create new Fuel type
