@@ -7,6 +7,7 @@ module.exports = function(app){
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
 
+    // GET - Renders Homepage
     app.get('/',function(req,res){
         res.render('home');
     })
@@ -22,8 +23,12 @@ module.exports = function(app){
     app.get("/delivery",function(req,res){
       res.render("delivery")
     })
+        app.get("/orders",function(req,res){
+      res.render("orders")
+    })
 
-    app.get("/orders",function(req,res){
+    // GET - Retreives all orders in DB
+    app.get("/ordersData",function(req,res){
       Order.getOrders(function(err, orders){
         if(err){
             throw err;
@@ -76,17 +81,18 @@ module.exports = function(app){
             Address: req.body.address,
             City : req.body.city,
             State : req.body.state,
-            Zip : req.body.zip,
+            ZIP : req.body.zip,
             Type : req.body.type,
+            Status : "Active",
         });
 
         newOrder.save(function(err){
             if(err)throw err;
-            res.redirect("/orders");
+            res.redirect("/customer");
         });
     });
 
-    //view new fuel page
+
     app.get("/fuels/new", function(req,res){
         res.render("new")
     })

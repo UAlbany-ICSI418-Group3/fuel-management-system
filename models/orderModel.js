@@ -8,6 +8,7 @@ var orderSchema = mongoose.Schema({
 	State: String,
 	ZIP: String,
 	Type: String,
+	Status: String,
 
 });
 
