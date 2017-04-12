@@ -6,15 +6,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link type="text/css" href="../public/css/styles.css" rel="stylesheet"></script>
+
+    <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular.min.js"></script>
+    <script src="../public/js/angular.js"></script>
 
     <title>UA Fuels Inc.</title>
-
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
-
+  
 </head>
 
 <body>
@@ -63,27 +63,26 @@
             <div class="col-lg-12">
                  <h2><u>Order Details: </u></h2><br>
                 
-                 <h4>
-                    Date:  <input type="date" id="Date"><br><br>
+                 <h4><form action = "/customer" method="post">
+                    Date:  <input type="text" name="date"><br><br>
 
-                    Time:  <font size="2"><i>(Optional)</i></font>  <input type="time" id="Time"><br><br>
+                    Time:  <font size="2"><i>(Optional)</i></font>  <input type="time" id="time"><br><br>
 
-                    Address:<input type="text" size="30" id="Address"><br><br>
+                    Address:<input type="text" size="30" name="address"><br><br>
 
-                    City: <input type="text" size="20" id="City"><br><br>
+                    City: <input type="text" size="20" name="city"><br><br>
 
-                    State: <input type="" size="10" id="State"><br><br>
+                    State: <input type="" size="10" name="state"><br><br>
 
-                    ZIP: <input type="text" size="5" id="ZIP"><br><br>
+                    ZIP: <input type="text" size="5" name="zip"><br><br>
 
-                    Type of Fuel: <select class="selectpicker">
-                                        <option>Oil</option>
-                                        <option>Propane</option>
-                                        <option>Gasoline</option>
-                                        </select><br><br>
-                 </h4>
+                    Type of Fuel: <input type="text" size="10" name="type"><br><br>
 
-            <a href="/" class="btn btn-primary">Submit</a>
+                    <br><br>
+                </h4>
+
+             <button class="btn btn-lg btn-default btn-primary btn-block">Submit!</button>
+            </form>
 
             </div>
         </div>

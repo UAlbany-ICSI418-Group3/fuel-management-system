@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app ="orderApp">
 
 <head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link type="text/css" href="../public/css/styles.css" rel="stylesheet"></script>
+
+    <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular.min.js"></script>
+    <script src="../public/js/orderCntrl.js"></script>
 
     <title>UA Fuels Inc.</title>
-
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
-
+  
 </head>
+
 
 <body>
 
@@ -58,17 +59,36 @@
             <p> <h1><i> UA Fuel Inc.</i></h1></p><hr>
         </header>
 
+        <h2>
+        <u>Orders: </u>   
+
+        <p align="right"><a href="/delivery" class="btn-lg btn-primary">Back</a></p>
+
+         </h2>
+
 
         <div class="row">
             <div class="col-lg-12">
-                 <h2>
-                    <u>Current Orders: </u>   
-
-                    <p align="right"><a href="/delivery" class="btn-lg btn-primary">Back</a></p>
-
-                 </h2><br>   
-
-                    This page will contain all the fuel orders
+                <div ng-controller="orderController">
+                        <table border=1>
+                        	<td><b>Date</b</td>
+                            <td><b>Address</b></td>
+                            <td><b>City</b></td>
+                            <td><b>ZIP</b></td>
+                            <td><b>State</b></td>
+                            <td><b>Type of Fuel</b></td>   
+                            <td><b>Status</td></b>
+                        	<tr ng-repeat="data in myData | orderBy : 'Status'">
+	                            <td>{{ data.Date }}</td>
+	                            <td>{{ data.Address }}</td>
+	                            <td>{{ data.City }}</td>
+	                            <td>{{ data.ZIP }}</td>
+	                            <td>{{ data.State }}</td>
+	                            <td>{{ data.Type }}</td>
+	                            <td>{{ data.Status }}</td>        
+                         	</tr>
+                     	</table>
+               	 </div>
             </div>
         </div>
 
@@ -89,5 +109,3 @@
     <script src="js/bootstrap.min.js"></script>
 
 </body>
-
-</html>

@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app ="fuelApp">
 
 <head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link type="text/css" href="../public/css/styles.css" rel="stylesheet"></script>
+
+    <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular.min.js"></script>
+    <script src="../public/js/fuelsCntrl.js"></script>
 
     <title>UA Fuels Inc.</title>
-
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
-
+  
 </head>
+
 
 <body>
 
@@ -58,18 +59,26 @@
             <p> <h1><i> UA Fuel Inc.</i></h1></p><hr>
         </header>
 
+        <h2>
+        <u>Inventory: </u>   
+
+        <p align="right"><a href="/inventorymang" class="btn-lg btn-primary">Back</a></p>
+
+         </h2>
+
 
         <div class="row">
             <div class="col-lg-12">
-                 <h2>
-                    <u>Current Inventory: </u>   
-
-                    <p align="right"><a href="/inventorymang" class="btn-lg btn-primary">Back</a></p>
-
-                 </h2><br>   
-
-                    This page will contain the current inventory amounts for each fuel
-
+                <div ng-controller="fuelController">
+                        <table border=1>
+                            <td><b>Type</b</td>
+                            <td><b>Amount</b></td>
+                            <tr ng-repeat="data in myData">
+                                <td>{{ data.type}}</td>
+                                <td>{{ data.amount }}</td>       
+                            </tr>
+                        </table>
+                 </div>
             </div>
         </div>
 
@@ -90,5 +99,3 @@
     <script src="js/bootstrap.min.js"></script>
 
 </body>
-
-</html>
