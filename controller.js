@@ -21,9 +21,15 @@ module.exports = function(app){
     passport.serializeUser(User.serializeUser());
     passport.deserializeUser(User.deserializeUser());
 
+    //unique middleware to put user on each page
+    app.use(function(req, res, next){
+      res.locals.currentUser = req.user;
+      next();
+    });
+
     // GET - Renders Homepage
     app.get('/',function(req,res){
-        res.render('home');
+        res.render('home', {currentUser:req.user});
     })
 
     // GET - Renders loging page
@@ -91,7 +97,7 @@ module.exports = function(app){
     });
 
     // POST - Create New Order
-    app.post('/customer',isLoggedIn, function(req,res){
+    app.post('/customer', function(req,res){
 
         var newOrder= Order({
             Date : req.body.date,
@@ -151,13 +157,30 @@ module.exports = function(app){
     })
     // handling login logic
 
-      //This is supposed to redirect to specific page!
-    app.post("/login", passport.authenticate("local",
-      {
-        successRedirect: "/",
-        failureRedirect: "/login"
-      }), function(req, res){
-    });
+    //  This is supposed to redirect to specific page!
+    app.post('/login', function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+      if (err) { return next(err); }
+      if (!user) {
+        console.log("no user");
+        return res.redirect('/login');
+      }
+      req.logIn(user, function(err) {
+        if (err) {
+          return next(err);
+        }
+        if (user.type === "customer"){
+          return res.redirect("/customer");
+        }
+      });
+        if (user.type === "inventory"){
+          return res.redirect("/inventory");
+        }
+        if (user.type === "delivery"){
+          return res.redirect("/delivery");
+        }
+    })(req, res, next);
+  });
 
     //logic logout
     app.get("/logout", function(req, res){
