@@ -91,7 +91,7 @@ module.exports = function(app){
     });
 
     // POST - Create New Order
-    app.post('/customer',function(req,res){
+    app.post('/customer',isLoggedIn, function(req,res){
 
         var newOrder= Order({
             Date : req.body.date,
@@ -123,15 +123,25 @@ module.exports = function(app){
     })
     //Sign up logic
     app.post("/register", function(req,res){
-      var newUser = new User({username: req.body.username});
+      var newUser = new User({username: req.body.username, type: req.body.type});
       //stores a hash for pw
       User.register(newUser, req.body.password, function(err, user){
         if(err){
           console.log(err);
           return res.render("register")
         }
+        console.log("registered!");
+
         passport.authenticate("local")(req,res,function(){
-          res.redirect("/campgrounds");
+          if(req.body.type == "customer"){
+            res.redirect("/customer");
+          }
+          else if(req.body.type == "inventory"){
+            res.redirect("/inventory");
+          }
+          else if(req.body.type == "devliery"){
+            res.redirect("/delivery");
+          }
         });
       });
     });
@@ -140,10 +150,11 @@ module.exports = function(app){
       res.render("login");
     })
     // handling login logic
-    //app.post("/login",middleware,callback)
+
+      //This is supposed to redirect to specific page!
     app.post("/login", passport.authenticate("local",
       {
-        successRedirect: "/campgrounds",
+        successRedirect: "/",
         failureRedirect: "/login"
       }), function(req, res){
     });
@@ -151,14 +162,15 @@ module.exports = function(app){
     //logic logout
     app.get("/logout", function(req, res){
       req.logout();
-      res.redirect("/campgrounds");
+      res.redirect("/");
+      console.log("logged Out!")
       })
 
     function isLoggedIn(req, res, next){
       if (req.isAuthenticated()){
         return next();
       }
-      res.redirect("/login");
+      res.redirect("/");
     }
 
     //Update a specific type of fuel
