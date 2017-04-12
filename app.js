@@ -3,7 +3,8 @@ var app = express();
 var config = require("./config");
 var mongoose = require("mongoose");
 var controller = require('./controller');
-var Fuel = require("./models/fuelModel")
+var Fuel = require("./models/fuelModel");
+var Orders = require("./models/orderModel");
 
 app.set('port', (process.env.PORT || 3000));
 
