@@ -39,17 +39,17 @@ module.exports = function(app){
 
     // GET - Renders Customer page
     app.get("/customer",function(req,res){
-      res.render("customer")
+      res.render("customer_order")
     })
 
     // GET - Renders Deliverymans page
     app.get("/delivery",function(req,res){
-      res.render("delivery")
+      res.render("delivery_order")
     })
 
     // GET - Renders Orders page
     app.get("/orders",function(req,res){
-      res.render("orders")
+      res.render("orders_list")
     })
 
     // GET - Retreives all orders in DB
@@ -111,7 +111,7 @@ module.exports = function(app){
 
         newOrder.save(function(err){
             if(err)throw err;
-            res.redirect("/customer");
+            res.redirect("/");
         });
     });
 
@@ -195,17 +195,4 @@ module.exports = function(app){
       }
       res.redirect("/");
     }
-
-    //Update a specific type of fuel
-    // app.get('/api/fuels/:id', function(req,res){
-
-    //Get a specific type of fuel
-
-    //Get an employee
-
-    //Create an employee
-
-    //Get a customer
-
-    //Create a customer
      }
