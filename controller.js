@@ -145,7 +145,7 @@ module.exports = function(app){
           else if(req.body.type == "inventory"){
             res.redirect("/inventory");
           }
-          else if(req.body.type == "devliery"){
+          else if(req.body.type == "delivery"){
             res.redirect("/delivery");
           }
         });
