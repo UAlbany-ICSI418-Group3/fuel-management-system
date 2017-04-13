@@ -6,7 +6,7 @@ var orderSchema = new mongoose.Schema({
 	Address: String,
 	City: String,
 	State: String,
-	ZIP: String,
+	Zip: String,
 	Type: String,
 	Status: String,
 
@@ -15,6 +15,6 @@ var orderSchema = new mongoose.Schema({
 var Order = module.exports = mongoose.model("Order", orderSchema);
 
 // get order
-module.exports.getOrders = function(callback, limit){
-	Order.find(callback).limit(limit);
-}
+// module.exports.getOrders = function(callback, limit){
+// 	Order.find(callback).limit(limit);
+// }
