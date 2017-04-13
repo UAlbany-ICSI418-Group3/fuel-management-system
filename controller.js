@@ -1,6 +1,7 @@
 var Fuel = require('./models/fuelModel.js');
 var bodyParser = require('body-parser');
 var Order = require("./models/orderModel.js");
+var Shipment = require("./models/shipmentModel.js")
 passport = require("passport"),
 LocalStrategy = require("passport-local"),
 User = require("./models/user"),
@@ -90,6 +91,22 @@ module.exports = function(app){
           }
           res.json(fuels);
       })
+    });
+
+    // POST - Puts shipment information in DB
+    app.post('/inventory/order',function(req,res){
+
+        var newShip= Shipment({
+          Date : req.body.date,
+          Type : req.body.type,
+          Amount : req.body.amount,
+          Price : req.body.price,
+        });
+
+        newShip.save(function(err){
+            if(err)throw err;
+            res.redirect("/");
+        });
     });
 
     //POST - Create new Fuel type
