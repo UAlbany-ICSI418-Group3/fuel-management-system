@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <% include ./partials/header %>
 
 <body>
@@ -10,7 +11,7 @@
                  <h2><u>Order Details: </u></h2><br>
 
                  <h4><form action = "/customer" method="POST">
-                    Date:  <input type="text" name="date"><br><br>
+                    Date:  <input type="date" name="date"><br><br>
 
                     Time:  <font size="2"><i>(Optional)</i></font>  <input type="time" id="time"><br><br>
 
@@ -22,7 +23,11 @@
 
                     ZIP: <input type="text" size="5" name="zip"><br><br>
 
-                    Type of Fuel: <input type="text" size="10" name="type"><br><br>
+                    Type of Fuel: <select class="selectpicker" name="type">
+                        <option>Oil</option>
+                        <option>Propane</option>
+                        <option>Gasoline</option>
+                        </select><br><br>
 
                     <br><br>
                 </h4>

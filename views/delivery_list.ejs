@@ -24,7 +24,7 @@
                             <td><b>State</b></td>
                             <td><b>Type of Fuel</b></td>
                             <td><b>Status</td></b>
-                        	<tr ng-repeat="data in orderData | orderBy : 'Status'">
+                        	<tr ng-repeat="data in orderData | orderBy : ['Status','Date']">
 	                            <td>{{ data.Date }}</td>
 	                            <td>{{ data.Address }}</td>
 	                            <td>{{ data.City }}</td>
