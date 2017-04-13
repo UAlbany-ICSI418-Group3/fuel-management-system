@@ -21,7 +21,7 @@ module.exports = function(app){
     passport.serializeUser(User.serializeUser());
     passport.deserializeUser(User.deserializeUser());
 
-    //unique middleware to put user on each page
+    //unique middleware to use user data with each page
     app.use(function(req, res, next){
       res.locals.currentUser = req.user;
       next();
@@ -32,44 +32,54 @@ module.exports = function(app){
         res.render('home', {currentUser:req.user});
     })
 
-    // GET - Renders loging page
-    app.get("/login",function(req,res){
-      res.render("login")
-    })
+    //===============DELIVERYMAN==============
 
-    // GET - Renders Customer page
-    app.get("/customer",function(req,res){
-      res.render("customer_order")
-    })
-
-    // GET - Renders Deliverymans page
+    // GET - Renders Deliverymans homepage
     app.get("/delivery",function(req,res){
+      res.render("delivery_landing")
+    })
+
+    // GET - Renders list delivery page
+    app.get("/delivery/list",function(req,res){
+          res.render("delivery_list")
+      })
+
+    // GET - Retrieves all orders in DB
+    app.get("/ordersData",function(req,res){
+      Order.find({}, function(err, allOrders){
+        if(err){
+          console.log(err);
+        }else{
+          res.send(allOrders)
+      }
+    })
+    });
+
+    // GET - Renders Delivery Order page
+    app.get("/delivery/order",function(req,res){
       res.render("delivery_order")
     })
 
-    // GET - Renders Orders page
-    app.get("/orders",function(req,res){
-      res.render("orders_list")
-    })
+    // POST - Create new Deliveryman order
 
-    // GET - Retreives all orders in DB
-    app.get("/ordersData",function(req,res){
-      Order.getOrders(function(err, orders){
-        if(err){
-            throw err;
-          }
-          res.json(orders);
-      })
-    });
+    // PUT - Edit Deliveryman order
 
-    // GET - Renders Inventory Manager page
-    app.get("/inventorymang",function(req,res){
-      res.render("inventorymang")
-    })
+    // Delete - Delete Delieveryman order
+
+    //=============INVENTORY===============
 
     // GET - Renders Inventory page
       app.get("/inventory",function(req,res){
-      res.render("inventory")
+      res.render("inventory_landing")
+    })
+
+    // GET - Renders Orders page
+    app.get("/inventory/order",function(req,res){
+      res.render("inventory_order")
+    })
+
+    app.get("/inventory/list",function(req,res){
+      res.render("inventory_list")
     })
 
     //GET - Retreive all fuel types in DB
@@ -96,7 +106,22 @@ module.exports = function(app){
         });
     });
 
-    // POST - Create New Order
+    //UPDATE - Updates old fuel types
+    //app.put(/inventory)
+
+
+
+    //===============CUSTOMER================
+    // GET - Renders Customer page
+    app.get("/customer",function(req,res){
+      res.render("customer_landing")
+    })
+
+    app.get("/customer/order", function(req,res){
+      res.render("customer_order")
+    })
+
+    // POST - Create new customer order
     app.post('/customer', function(req,res){
 
         var newOrder= Order({
@@ -104,21 +129,16 @@ module.exports = function(app){
             Address: req.body.address,
             City : req.body.city,
             State : req.body.state,
-            ZIP : req.body.zip,
+            Zip : req.body.zip,
             Type : req.body.type,
             Status : "Active",
         });
-
         newOrder.save(function(err){
             if(err)throw err;
             res.redirect("/");
         });
     });
 
-
-    app.get("/fuels/new", function(req,res){
-        res.render("new")
-    })
 
     //======================
     //Auth Routes
@@ -157,7 +177,7 @@ module.exports = function(app){
     })
     // handling login logic
 
-    //  This is supposed to redirect to specific page!
+    // Redirects to a specific page!
     app.post('/login', function(req, res, next) {
     passport.authenticate('local', function(err, user, info) {
       if (err) { return next(err); }
@@ -182,17 +202,18 @@ module.exports = function(app){
     })(req, res, next);
   });
 
-    //logic logout
+    //Logout logic
     app.get("/logout", function(req, res){
       req.logout();
       res.redirect("/");
       console.log("logged Out!")
       })
 
-    function isLoggedIn(req, res, next){
-      if (req.isAuthenticated()){
-        return next();
-      }
-      res.redirect("/");
-    }
+      //Check if user is logged in to continue
+    // function isLoggedIn(req, res, next){
+    //   if (req.isAuthenticated()){
+    //     return next();
+    //   }
+    //   res.redirect("/");
+    // }
      }
