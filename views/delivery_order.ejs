@@ -14,30 +14,30 @@
 
                  </h2><br>
 
-                 <h4>
-                    Date:  <input type="date" id="Date"><br><br>
+                 <h4><form action = "/customer" method="POST">
+                    Date:  <input type="date" name="date"><br><br>
 
-                    Address:<input type="text" size="30" id="Address"><br><br>
+                    Time:  <font size="2"><i>(Optional)</i></font>  <input type="time" name="time"><br><br>
 
-                    City: <input type="text" size="20" id="City"><br><br>
+                    Address:<input type="text" size="30" name="address"><br><br>
 
-                    State: <input type="" size="10" id="State"><br><br>
+                    City: <input type="text" size="20" name="city"><br><br>
 
-                    ZIP: <input type="text" size="5" id="ZIP"><br><br>
+                    State: <input type="" size="10" name="state"><br><br>
 
-                    Type of Fuel: <select class="selectpicker">
-                                        <option>Oil</option>
-                                        <option>Propane</option>
-                                        <option>Gasoline</option>
-                                        </select><br><br>
+                    ZIP: <input type="text" size="5" name="zip"><br><br>
 
-                    Amount: <input type="text" size="5" id="Amount"> <font size="2">gallons</font><br><br>
+                    Type of Fuel: <select class="selectpicker" name="type">
+                        <option>Oil</option>
+                        <option>Propane</option>
+                        <option>Gasoline</option>
+                        </select><br><br>
 
-                    Price: <input type="text" size="5" id="price" placeholder="$"><br><br>
+                    <br><br>
+                </h4>
 
-                 </h4>
-
-            <a href="/" class="btn btn-primary">Submit</a>
+             <button class="btn btn-lg btn-default btn-primary btn-block">Submit!</button>
+            </form>
 
             </div>
         </div>

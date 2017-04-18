@@ -2,10 +2,10 @@ var mongoose = require('mongoose');
 
 var shipmentSchema = new mongoose.Schema({
 
-	Date : String,
-	Type : String,
-	Amount : Number,
-	Price : Number,
+	date : String,
+	type : String,
+	amount : Number,
+	price : Number,
 
 
 });
