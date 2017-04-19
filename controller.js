@@ -40,8 +40,8 @@ module.exports = function(app){
     app.post('/fuels',function(req,res){
 
       //if there is a body in the reqest, do an update
-      if(req.body._id){
-        Fuel.findByIdAndUpdate(req.body._id,{
+      if(req.body.id){
+        Fuel.findByIdAndUpdate(req.body.id,{
           amount:  req.body.amount},
           function(err,fuels){
             if (err) throw err;

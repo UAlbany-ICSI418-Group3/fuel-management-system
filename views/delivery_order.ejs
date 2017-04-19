@@ -6,12 +6,13 @@
 <div ng-controller="fuelController">
   <div class="container">
     <div class="row">
-      <div class="col-lg-12">
+      <h1 style="text-align: center">Enter a Delivery</h1>
+      <div style="width: 30%; margin: 30px auto;">
         <br>
         First Name: <input class="form-control" type="text" ng-model="firstName"/>
         Last Name:  <input class="form-control" type="text" ng-model="lastName"/>
-        Date:       <input class="form-control" type="text" ng-model="date"/>
-        Time:       <input class="form-control" type="text" ng-model="time"/>
+        Date:       <input class="form-control" type="date" ng-model="date"/>
+        Time:       <input class="form-control" type="time" ng-model="time"/>
         Address:    <input class="form-control" type="text" ng-model="address"/>
         City:       <input class="form-control" type="text" ng-model="city"/>
         State:      <input class="form-control" type="text" ng-model="state"/>
