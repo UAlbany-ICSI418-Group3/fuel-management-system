@@ -1,5 +1,8 @@
     var fuelApp=angular.module('FuelApp',[]);
 
+    //We'll try to just use this one angular controller for all of our client side javascript
+    //We might need more if we run into scoping problems with the variables
+    
     fuelApp.controller('fuelController',['$scope','$http',
     function($scope,$http){
 
@@ -13,14 +16,11 @@
           console.log(data);
         });
 
-        $scope.click = function(){
-          console.log("click!")
-        }
-
         //posts delivery order...
-        //should make a record of transaction and reduce amount of total fuel
+        //creates a record of the transaction and substracts amount of total fuel (done on the server)
         $scope.postOrderFromDelivery = function(){
 
+          //Probably wouldn't actually want these hardcoded, but is a quick hack
           if($scope.type == 'Oil'){
             $scope.fuelID = "58f6c93ff09dac76237d911f"
           }
@@ -30,7 +30,7 @@
           else if($scope.type == 'Gasoline'){
             $scope.fuelID = "58f556c7cee2624033ea93b3"
           }
-          console.log("here!")
+
           $http.post('/orders',
               {
                 firstName: $scope.firstName,
@@ -52,7 +52,7 @@
               console.log(data);
           });
 
-          $http.post('/fuels',
+          $http.post('/fuelsDelivery',
               {
                 id: $scope.fuelID,
                 type: $scope.type,
@@ -64,9 +64,7 @@
           .error(function (data, status) {
               console.log(data);
           });
-
     }
-
 
     //gets fuels
     $http.get('/fuels')
@@ -77,33 +75,23 @@
     .error(function(data,status){
     console.log('error!');
     console.log(data);
-    });
-
-    //posts fuels
-    $scope.postFuelFromDelivery = function(){
-      console.log("here!")
-      $http.post('/orders',
-          {
-            type: $scope.type,
-            amount: $scope.amount,
-            })
-     .success(function (result) {
-          $scope.msg="posted";
-          console.log("posted!")
-      })
-      .error(function (data, status) {
-          console.log(data);
-      });
-}
+  });
 
 
-
-
+    //posts fuels - probably can remove, we shouldn't need to post new fuels
+//     $scope.postFuelFromDelivery = function(){
+//       console.log("here!")
+//       $http.post('/orders',
+//           {
+//             type: $scope.type,
+//             amount: $scope.amount,
+//             })
+//      .success(function (result) {
+//           $scope.msg="posted";
+//           console.log("posted!")
+//       })
+//       .error(function (data, status) {
+//           console.log(data);
+//       });
+// }
   }]);
-
-
-        //not sure what this is doing - BG
-    //     $scope.removeName = function(row) {
-    //         $scope.myData.splice($scope.myData.indexOf(row),1);
-    //     }
-    // });

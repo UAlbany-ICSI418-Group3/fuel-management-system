@@ -35,35 +35,40 @@ module.exports = function(app){
 
 
     //===============Fuels==============
-
     //POST - Create new Fuel type
-    app.post('/fuels',function(req,res){
-
+    //***Decrements Fuel***
+    app.post('/fuelsDelivery',function(req,res){
+      
       //if there is a body in the reqest, do an update
       if(req.body.id){
-        Fuel.findByIdAndUpdate(req.body.id,{
-          amount:  req.body.amount},
-          function(err,fuels){
-            if (err) throw err;
-            res.send("Fuel updated!");
-          });
-      }
+        Fuel.findById(req.body.id, function (err, fuel) {
+          if (err) throw err;
 
+          fuelAmount = fuel.amount - req.body.amount
+          
+        Fuel.findByIdAndUpdate(req.body.id,{
+          amount:  fuelAmount},
+          function(err,fuel){
+            if (err) throw err;
+            res.send(fuel);
+          });
+
+         } )
+       }
       //If there is no body, we create a new type of fuel
       //This probably wont actually be needed
-      else{
+      // else{
 
-        var newFuel= Fuel({
-            type:    req.body.type,
-            amount:  req.body.amount,
-        });
-        newFuel.save(function(err){
-            if(err)throw err;
-            res.redirect("/fuels");
-        });
-      }
+      //   var newFuel= Fuel({
+      //       type:    req.body.type,
+      //       amount:  req.body.amount,
+      //   });
+      //   newFuel.save(function(err){
+      //       if(err)throw err;
+      //       res.redirect("/fuels");
+      //   });
+      // }
     });
-
 
     //GET - Retreive all fuel types in DB
     app.get("/fuels",function(req,res){
@@ -111,8 +116,6 @@ module.exports = function(app){
         });
     });
 
-
-
     //===============DELIVERY==============
 
     // GET - Renders Deliverymans homepage
@@ -151,10 +154,10 @@ module.exports = function(app){
     app.post('/inventory/order',function(req,res){
 
         var newShip= Shipment({
-          Date : req.body.date,
-          Type : req.body.type,
-          Amount : req.body.amount,
-          Price : req.body.price,
+          date : req.body.date,
+          type : req.body.type,
+          amount : req.body.amount,
+          price : req.body.price,
         });
 
         newShip.save(function(err){
