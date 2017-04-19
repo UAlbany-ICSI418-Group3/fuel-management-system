@@ -1,12 +1,22 @@
-    var orderApp=angular.module('orderApp',[]);
+    var fuelApp=angular.module('FuelApp',[]);
 
-    orderApp.controller('orderController',function($scope,$http){
+    fuelApp.controller('fuelController',['$scope','$http',
+    function($scope,$http){
 
+      //gets fuels
+      $http.get('/fuels')
+      .success(function(response){
+        console.log("success")
+          $scope.fuelData = response;
+      })
+      .error(function(data,status){
+      console.log('error!');
+      console.log(data);
+      });
 
+      //gets orders
       $http.get('/orders')
         .success(function(response){
-          console.log("HEREEE")
-          console.log(response);
             $scope.orderData = response;
         })
           .error(function(data,status){
@@ -14,8 +24,14 @@
           console.log(data);
         });
 
+        $scope.click = function(){
+          console.log("click!")
+        }
 
+        //posts delivery order...
+        //should make a record of transaction and reduce amount of total fuel
         $scope.postOrderFromDelivery = function(){
+          console.log("here!")
           $http.post('/orders',
               {
                 firstName: $scope.firstName,
@@ -38,11 +54,15 @@
               console.log(data);
           });
     }
-  }
+
+
+
+
+  }]);
 
 
         //not sure what this is doing - BG
-        $scope.removeName = function(row) {
-            $scope.myData.splice($scope.myData.indexOf(row),1);
-        }
-    });
+    //     $scope.removeName = function(row) {
+    //         $scope.myData.splice($scope.myData.indexOf(row),1);
+    //     }
+    // });
