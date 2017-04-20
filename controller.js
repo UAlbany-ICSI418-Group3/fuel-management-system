@@ -128,6 +128,7 @@ module.exports = function(app){
         newOrder.save(function(err){
             if(err)throw err;
             res.send('order created!');
+            res.redirect("delivery_landing");
         });
     });
 
