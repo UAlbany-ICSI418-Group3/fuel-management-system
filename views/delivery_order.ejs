@@ -3,44 +3,35 @@
 
 <body>
 
-    <!-- Page Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                 <h2>
-                    <u>Delivery Details: </u>
+<div ng-controller="fuelController">
+  <div class="container">
+    <div class="row">
+      <h1 style="text-align: center">Enter a Delivery</h1>
+      <div style="width: 30%; margin: 30px auto;">
+        <br>
+        First Name: <input class="form-control" type="text" ng-model="firstName"/>
+        Last Name:  <input class="form-control" type="text" ng-model="lastName"/>
+        Date:       <input class="form-control" type="date" ng-model="date"/>
+        Time:       <input class="form-control" type="time" ng-model="time"/>
+        Address:    <input class="form-control" type="text" ng-model="address"/>
+        City:       <input class="form-control" type="text" ng-model="city"/>
+        State:      <input class="form-control" type="text" ng-model="state"/>
+        Zip:        <input class="form-control" type="text" ng-model="zip"/>
+        <br>
+        Fuel Type:  <br><select class="selectpicker" ng-model="type">
+                <option>Oil</option>
+                <option>Propane</option>
+                <option>Gasoline</option>
+                   </select>
+        <br><br>
+        Amount:    <input class="form-control" type="text" ng-model="amount"/>
+        Price:     <input class="form-control" type="text" ng-model="price"/>
+        <br><br>
+        <a href="#" class="btn btn-default"
+        ng-click="postOrderFromDelivery()">Submit</a>
 
-                    <p align="right"><a href="/delivery" class="btn-lg btn-primary">Back</a></p>
-
-                 </h2><br>
-
-                 <h4>
-                    Date:  <input type="date" id="Date"><br><br>
-
-                    Address:<input type="text" size="30" id="Address"><br><br>
-
-                    City: <input type="text" size="20" id="City"><br><br>
-
-                    State: <input type="" size="10" id="State"><br><br>
-
-                    ZIP: <input type="text" size="5" id="ZIP"><br><br>
-
-                    Type of Fuel: <select class="selectpicker">
-                                        <option>Oil</option>
-                                        <option>Propane</option>
-                                        <option>Gasoline</option>
-                                        </select><br><br>
-
-                    Amount: <input type="text" size="5" id="Amount"> <font size="2">gallons</font><br><br>
-
-                    Price: <input type="text" size="5" id="price" placeholder="$"><br><br>
-
-                 </h4>
-
-            <a href="/" class="btn btn-primary">Submit</a>
-
-            </div>
-        </div>
-</body>
-
+      </div>
+    </div>
+  </div>
+</div>
 <% include ./partials/footer %>

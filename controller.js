@@ -33,7 +33,90 @@ module.exports = function(app){
         res.render('home', {currentUser:req.user});
     })
 
-    //===============DELIVERYMAN==============
+
+    //===============Fuels==============
+    //POST - Create new Fuel type
+    //***Decrements Fuel***
+    app.post('/fuelsDelivery',function(req,res){
+      
+      //if there is a body in the reqest, do an update
+      if(req.body.id){
+        Fuel.findById(req.body.id, function (err, fuel) {
+          if (err) throw err;
+
+          fuelAmount = fuel.amount - req.body.amount
+          
+        Fuel.findByIdAndUpdate(req.body.id,{
+          amount:  fuelAmount},
+          function(err,fuel){
+            if (err) throw err;
+            res.send(fuel);
+          });
+
+         } )
+       }
+      //If there is no body, we create a new type of fuel
+      //This probably wont actually be needed
+      // else{
+
+      //   var newFuel= Fuel({
+      //       type:    req.body.type,
+      //       amount:  req.body.amount,
+      //   });
+      //   newFuel.save(function(err){
+      //       if(err)throw err;
+      //       res.redirect("/fuels");
+      //   });
+      // }
+    });
+
+    //GET - Retreive all fuel types in DB
+    app.get("/fuels",function(req,res){
+      Fuel.getFuels(function(err, fuels){
+        if(err){
+            throw err;
+          }
+          res.json(fuels);
+      })
+    });
+
+    //===============Orders==================
+    // GET - Retrieves all orders in DB
+    app.get("/orders",function(req,res){
+      Order.find({}, function(err, allOrders){
+        if(err){
+          console.log(err);
+        }else{
+          res.send(allOrders)
+      }
+    })
+    });
+
+    // POST - Creates a new order. Same order model used for both the
+    // customer and delivery peron.
+    app.post('/orders',function(req,res){
+
+        var newOrder= Order({
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          date : req.body.date,
+          address: req.body.address,
+          city : req.body.city,
+          state : req.body.state,
+          zip : req.body.zip,
+          status : req.body.status,
+          amount: req.body.amount,
+          type: req.body.type,
+          price: req.body.price,
+        });
+
+        newOrder.save(function(err){
+            if(err)throw err;
+            res.send('order created!');
+        });
+    });
+
+    //===============DELIVERY==============
 
     // GET - Renders Deliverymans homepage
     app.get("/delivery",function(req,res){
@@ -45,27 +128,11 @@ module.exports = function(app){
           res.render("delivery_list")
       })
 
-    // GET - Retrieves all orders in DB
-    app.get("/ordersData",function(req,res){
-      Order.find({}, function(err, allOrders){
-        if(err){
-          console.log(err);
-        }else{
-          res.send(allOrders)
-      }
-    })
-    });
-
     // GET - Renders Delivery Order page
     app.get("/delivery/order",function(req,res){
       res.render("delivery_order")
     })
 
-    // POST - Create new Deliveryman order
-
-    // PUT - Edit Deliveryman order
-
-    // Delete - Delete Delieveryman order
 
     //=============INVENTORY===============
 
@@ -83,24 +150,14 @@ module.exports = function(app){
       res.render("inventory_list")
     })
 
-    //GET - Retreive all fuel types in DB
-    app.get("/fuelData",function(req,res){
-      Fuel.getFuels(function(err, fuels){
-        if(err){
-            throw err;
-          }
-          res.json(fuels);
-      })
-    });
-
     // POST - Puts shipment information in DB
     app.post('/inventory/order',function(req,res){
 
         var newShip= Shipment({
-          Date : req.body.date,
-          Type : req.body.type,
-          Amount : req.body.amount,
-          Price : req.body.price,
+          date : req.body.date,
+          type : req.body.type,
+          amount : req.body.amount,
+          price : req.body.price,
         });
 
         newShip.save(function(err){
@@ -108,25 +165,6 @@ module.exports = function(app){
             res.redirect("/");
         });
     });
-
-    //POST - Create new Fuel type
-    app.post('/fuels',function(req,res){
-
-        var newFuel= Fuel({
-            type:    req.body.type,
-            amount:  req.body.amount,
-        });
-
-        newFuel.save(function(err){
-            if(err)throw err;
-            res.redirect("/fuels");
-        });
-    });
-
-    //UPDATE - Updates old fuel types
-    //app.put(/inventory)
-
-
 
     //===============CUSTOMER================
     // GET - Renders Customer page
@@ -138,27 +176,58 @@ module.exports = function(app){
       res.render("customer_order")
     })
 
-    // POST - Create new customer order
-    app.post('/customer', function(req,res){
+    // POST - Create new Customer order
+    // **The customer order should NOT decrement the amount of fuel**
+    // Should create a separate customer order model that can then
+    // be used by the deliveryman
+//     app.post('/customer', function(req,res){
+//
+//         var newOrder= Order({
+//             date : req.body.date,
+//             address: req.body.address,
+//             city : req.body.city,
+//             state : req.body.state,
+//             zip : req.body.zip,
+//             type : req.body.type,
+//             status : "Active",
+//         });
+//         newOrder.save(function(err){
+//             if(err)throw err;
+//             res.redirect("/");
+//         });
+//     });
+//
+//     // PUT - Edit customer order
+//     app.put('/customer/edit',function(req,res){
+//       console.log(req.body._id)
+//       console.log(req.body.date)
+//       console.log(req.body.address)
+//
+//     if (req.body._id){
+//         Order.findByIdAndUpdate(req.body._id, {
+//           date : req.body.date,
+//           address: req.body.address,
+//           city : req.body.city,
+//           state : req.body.state,
+//           zip : req.body.zip},
+//             function(err,order){
+//             if (err) throw err;
+//             res.send('customer order updated');
+//         })
+//     };
+// });
+//
+//     //deletes an order
+//     app.delete('/ordersData/:id', function(req, res) {
+//     console.log(req.params.id);
+//     Order.findByIdAndRemove(req.params.id, function(err) {
+//         if (err) throw err;
+//         res.send('Order Deleted');
+//     })
+// });
 
-        var newOrder= Order({
-            Date : req.body.date,
-            Address: req.body.address,
-            City : req.body.city,
-            State : req.body.state,
-            Zip : req.body.zip,
-            Type : req.body.type,
-            Status : "Active",
-        });
-        newOrder.save(function(err){
-            if(err)throw err;
-            res.redirect("/");
-        });
-    });
 
-
-    //======================
-    //Auth Routes
+    //==========Authentication===========
 
     //show register form
     app.get("/register", function(req, res){

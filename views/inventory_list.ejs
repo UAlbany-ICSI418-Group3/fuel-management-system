@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <% include ./partials/header %>
 
-<html lang="en" ng-app ="fuelApp">
-
 <body>
 
     <!-- Page Content -->
@@ -20,7 +18,7 @@
                         <table border=1>
                             <td><b>Type</b</td>
                             <td><b>Amount</b></td>
-                            <tr ng-repeat="data in myData">
+                            <tr ng-repeat="data in fuelData">
                                 <td>{{ data.type}}</td>
                                 <td>{{ data.amount }}</td>
                             </tr>

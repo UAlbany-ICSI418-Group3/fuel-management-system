@@ -2,13 +2,18 @@ var mongoose = require('mongoose');
 
 var orderSchema = new mongoose.Schema({
 
-	Date: String,
-	Address: String,
-	City: String,
-	State: String,
-	Zip: String,
-	Type: String,
-	Status: String,
+	firstName: String,
+	lastName: String,
+	date: String,
+	time: String,
+	address: String,
+	city: String,
+	state: String,
+	zip: String,
+	status: String,
+	amount: Number,
+	type: String,
+	price: Number
 
 });
 
