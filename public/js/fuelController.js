@@ -25,7 +25,7 @@
             $scope.fuelID = "58f6c93ff09dac76237d911f"
           }
           else if($scope.type == 'Propane'){
-            $scope.fuelID = "58f556b2cee2624033ea93b2"
+            $scope.fuelID = "58f6d297ada98b84e775bdcf"
           }
           else if($scope.type == 'Gasoline'){
             $scope.fuelID = "58f556c7cee2624033ea93b3"
