@@ -37,15 +37,15 @@ module.exports = function(app){
     //===============Fuels==============
     //POST - Create new Fuel type
     //***Decrements Fuel***
-    app.post('/fuelsDelivery',function(req,res){
-      
+    app.post('/fuels/delivery',function(req,res){
+
       //if there is a body in the reqest, do an update
       if(req.body.id){
         Fuel.findById(req.body.id, function (err, fuel) {
           if (err) throw err;
 
           fuelAmount = fuel.amount - req.body.amount
-          
+
         Fuel.findByIdAndUpdate(req.body.id,{
           amount:  fuelAmount},
           function(err,fuel){
@@ -80,42 +80,6 @@ module.exports = function(app){
       })
     });
 
-    //===============Orders==================
-    // GET - Retrieves all orders in DB
-    app.get("/orders",function(req,res){
-      Order.find({}, function(err, allOrders){
-        if(err){
-          console.log(err);
-        }else{
-          res.send(allOrders)
-      }
-    })
-    });
-
-    // POST - Creates a new order. Same order model used for both the
-    // customer and delivery peron.
-    app.post('/orders',function(req,res){
-
-        var newOrder= Order({
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          date : req.body.date,
-          address: req.body.address,
-          city : req.body.city,
-          state : req.body.state,
-          zip : req.body.zip,
-          status : req.body.status,
-          amount: req.body.amount,
-          type: req.body.type,
-          price: req.body.price,
-        });
-
-        newOrder.save(function(err){
-            if(err)throw err;
-            res.send('order created!');
-        });
-    });
-
     //===============DELIVERY==============
 
     // GET - Renders Deliverymans homepage
@@ -133,6 +97,39 @@ module.exports = function(app){
       res.render("delivery_order")
     })
 
+    app.get("/delivery/orders",function(req,res){
+      Order.find({}, function(err, allOrders){
+        if(err){
+          console.log(err);
+        }else{
+          res.send(allOrders)
+      }
+    })
+    });
+
+    // POST - Creates a new order. Same order model used for both the
+    // customer and delivery peron.
+    app.post('/delivery/orders',function(req,res){
+
+        var newOrder= Order({
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          dateTime : req.body.dateTime,
+          address: req.body.address,
+          city : req.body.city,
+          state : req.body.state,
+          zip : req.body.zip,
+          status : req.body.status,
+          amount: req.body.amount,
+          type: req.body.type,
+          price: req.body.price,
+        });
+
+        newOrder.save(function(err){
+            if(err)throw err;
+            res.send('order created!');
+        });
+    });
 
     //=============INVENTORY===============
 

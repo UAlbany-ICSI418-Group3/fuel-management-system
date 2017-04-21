@@ -4,8 +4,7 @@ var orderSchema = new mongoose.Schema({
 
 	firstName: String,
 	lastName: String,
-	date: String,
-	time: String,
+	dateTime: String,
 	address: String,
 	city: String,
 	state: String,
