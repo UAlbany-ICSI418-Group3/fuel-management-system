@@ -2,12 +2,12 @@
 
     //We'll try to just use this one angular controller for all of our client side javascript
     //We might need more if we run into scoping problems with the variables
-    
+
     fuelApp.controller('fuelController',['$scope','$http',
     function($scope,$http){
 
       //gets orders
-      $http.get('/orders')
+      $http.get('/delivery/orders')
         .success(function(response){
             $scope.orderData = response;
         })
@@ -31,12 +31,11 @@
             $scope.fuelID = "58f556c7cee2624033ea93b3"
           }
 
-          $http.post('/orders',
+          $http.post('/delivery/orders',
               {
                 firstName: $scope.firstName,
                 lastName: $scope.lastName,
-                date: $scope.date,
-                time: $scope.time,
+                dateTime: $scope.dateTime,
                 city: $scope.city,
                 state: $scope.state,
                 zip: $scope.zip,
@@ -44,6 +43,7 @@
                 amount: $scope.amount,
                 type: $scope.type,
                 price: $scope.price,
+                status: "Delivered"
                 })
          .success(function (result) {
               console.log("posted orders!")
@@ -52,7 +52,7 @@
               console.log(data);
           });
 
-          $http.post('/fuelsDelivery',
+          $http.post('/fuels/delivery',
               {
                 id: $scope.fuelID,
                 type: $scope.type,

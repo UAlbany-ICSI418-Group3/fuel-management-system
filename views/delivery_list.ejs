@@ -9,7 +9,7 @@
         <h2>
         <u>Orders: </u>
 
-        <p align="right"><a href="/delivery" class="btn-lg btn-primary">Back</a></p>
+        <p align="right"><a href="/delivery" class="btn btn-lg btn-primary">Back</a></p>
 
          </h2>
         <div class="row">
@@ -19,7 +19,6 @@
                     <td><b>First Name</b></td>
                     <td><b>Last Name</b></td>
                 	  <td><b>Date</b></td>
-                    <td><b>Time</b></td>
                     <td><b>Address</b></td>
                     <td><b>City</b></td>
                     <td><b>State</b></td>
@@ -29,11 +28,10 @@
                     <td><b>Price</td></b>
                     <td><b>Status</b></td>
 
-                	<tr ng-repeat="data in orderData | orderBy : ['Status','Date']">
+                	<tr ng-repeat="data in orderData | orderBy:'-'">
                     <td>{{ data.firstName }}</td>
                     <td>{{ data.lastName }}</td>
-                    <td>{{ data.date }}</td>
-                    <td>{{ data.time }}</td>
+                    <td>{{ data.dateTime | date:'MM/dd/yyyy @ h:mma' }}</td>
                     <td>{{ data.address }}</td>
                     <td>{{ data.city }}</td>
                     <td>{{ data.state }}</td>

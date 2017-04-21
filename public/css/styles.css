@@ -9,3 +9,71 @@ table tr:nth-child(even) {
 table tr:nth-child(odd) {
   background-color: #ffffff;
 }
+
+html *
+{
+  font-family: Lato;
+}
+
+.footer {
+  padding: 1rem;
+  text-align: right;
+}
+.btn {
+  width: 20%;
+  color: black;
+  background-color: white;
+  border-color: black;
+}
+.btn:hover{
+  background-color: grey;
+  color: white;
+  border-color: grey;
+}
+
+.btn:active:focus{
+  background-color: black;
+}
+
+.page-header{
+  text-align: center;
+}
+
+.thumbnail{
+  background-color: #efefef;
+  border-color: white;
+  border-width: thin;
+}
+
+.jumbotron{
+  padding-bottom: 125px;
+  background-color: white;
+  color: white;
+  margin-top: 20px;
+  font-style: italic;
+  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+  height: 100%;
+  background-image: url("http://article.images.consumerreports.org/h_436,w_598/prod/content/dam/cro/news_articles/cars/CRO_cars_fuel_economy_oil_rig_05-13");
+  background-repeat: no-repeat;
+  background-size: 875px 300px;
+  background-position: center;
+
+}
+
+.title-header{
+  text-align: center;
+  color:#696969;
+  text-decoration: underline;
+}
+
+h2{
+  text-decoration: underline;
+  color: #0000b3;
+  font-size: 2em;
+}
+
+img{
+  align: middle;
+  width:10%;
+  height:10%;
+}
