@@ -98,7 +98,7 @@
         console.log("error" + res.type)
     });
     console.log("outside")
-          }
+  }
 
 
     //updates the status of the order, and the fuel total
@@ -135,4 +135,59 @@
               console.log(data);
           });
     }
+    // Adds shipment to DB, and adds new fuel to inventory
+     $scope.postOrderFromInvManager = function(){
+
+
+          if($scope.type == 'Oil'){
+            $scope.fuelID = "58f6c93ff09dac76237d911f"
+          }
+          else if($scope.type == 'Propane'){
+            $scope.fuelID = "58f6d297ada98b84e775bdcf"
+          }
+          else if($scope.type == 'Gasoline'){
+            $scope.fuelID = "58f556c7cee2624033ea93b3"
+          }
+
+          // Place new shipment in database
+          $http.post('/inventory/order',
+              {
+                date: $scope.date,
+                type: $scope.type,
+                amount: $scope.amount,
+                price: $scope.price
+                })
+
+         .success(function (result) {
+              console.log("posted orders!")
+          })
+          .error(function (data, status) {
+              console.log(data);
+          });
+
+          // Updates amount of fuels
+          $http.post('/fuels/shipment',
+              {
+                id: $scope.fuelID,
+                type: $scope.type,
+                amount: $scope.amount,
+                })
+         .success(function (result) {
+              console.log("updated fuels!")
+          })
+          .error(function (data, status) {
+              console.log(data);
+          });
+    }
+
+    $http.get('/fuels')
+    .success(function(response){
+      console.log("success")
+        $scope.fuelData = response;
+    })
+    .error(function(data,status){
+    console.log('error!');
+    console.log(data);
+  });
+
   }]);

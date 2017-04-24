@@ -34,12 +34,11 @@ module.exports = function(app){
     })
 
 
-    //===============Fuels==============
-    //POST - Create new Fuel type
-    //***Decrements Fuel***
+    /* ============================ Fuels ============================== */
+
+    /* POST - Decrements inventory fuel level from a delivery */
     app.post('/fuels/delivery',function(req,res){
 
-      //if there is a body in the reqest, do an update
       if(req.body.id){
 
         Fuel.findById(req.body.id, function (err, fuel) {
@@ -68,28 +67,30 @@ module.exports = function(app){
       })
     });
 
-    //===============DELIVERY==============
+    /* =========================== Delivery =========================== */
 
-    // GET - Renders Deliverymans homepage
+    /* GET - Renders Deliverymans homepage */
     app.get("/delivery",function(req,res){
       res.render("delivery_landing")
     })
 
-    // GET - Renders list delivery page
+    /* GET - Renders list delivery page */
     app.get("/delivery/list",function(req,res){
           res.render("delivery_list")
       })
 
-    // GET - Renders Delivery Order page
+    /* GET - Renders Delivery Order page */
     app.get("/delivery/order",function(req,res){
       res.render("delivery_order")
     })
+
 
     // GET - Renders Delivery Order Success page
     app.get("/delivery/success",function(req,res){
       res.render("delivery_order_success")
     })
 
+    /* GET- Displays all orders from database */
     app.get("/delivery/orders",function(req,res){
       Order.find({}, function(err, allOrders){
         if(err){
@@ -100,8 +101,8 @@ module.exports = function(app){
     })
     });
 
-    // POST - Creates a new order. Same order model used for both the
-    // customer and delivery peron.
+    /*POST - Creates a new order. (Same order model used for both the
+             customer and delivery peron) */
     app.post('/delivery/orders',function(req,res){
 
         var newOrder= Order({
@@ -133,29 +134,30 @@ module.exports = function(app){
           console.log("inside else")
             newOrder.save(function(err){
             if(err)throw err;
-            res.send('order created!');
+
         });
         }
     });
 
-    //=============INVENTORY===============
+    /* =========================== Inventory ============================ */
 
-    // GET - Renders Inventory page
+    /* GET - Renders Inventory page */
       app.get("/inventory",function(req,res){
       res.render("inventory_landing")
     })
 
-    // GET - Renders Orders page
+    /* GET - Renders Orders page */
     app.get("/inventory/order",function(req,res){
       res.render("inventory_order")
     })
 
+    /* GET - Renders inventory list page */
     app.get("/inventory/list",function(req,res){
       res.render("inventory_list")
     })
 
-    // POST - Puts shipment information in DB
-    app.post('/inventory/order',function(req,res){
+    /* POST - Puts new shipment in database */
+    app.post("/inventory/order",function(req,res){
 
         var newShip= Shipment({
           date : req.body.date,
@@ -170,12 +172,34 @@ module.exports = function(app){
         });
     });
 
-    //===============CUSTOMER================
-    // GET - Renders Customer page
+    /* POST - Adds new fuel from shipment to current fuel inventory */
+    app.post("/fuels/shipment",function(req,res){
+
+      if(req.body.id){
+        Fuel.findById(req.body.id, function (err, fuel) {
+          if (err) throw err;
+
+          fuelAmount = fuel.amount + req.body.amount
+
+        Fuel.findByIdAndUpdate(req.body.id,{
+          amount:  fuelAmount},
+          function(err,fuel){
+            if (err) throw err;
+            res.send(fuel);
+          });
+
+         } )
+      }
+    });
+
+    /* =========================== Customer ============================ */
+
+    /* GET - Renders Customer page */
     app.get("/customer",function(req,res){
       res.render("customer_landing")
     })
 
+    /* GET - Renders customer orders page */
     app.get("/customer/order", function(req,res){
       res.render("customer_order")
     })
@@ -203,41 +227,12 @@ module.exports = function(app){
           type: req.body.type,
           price: req.body.price,
         });
-  
+
         newOrder.save(function(err){
           if(err)throw err;
-          res.send("customer order created!")                    
+          res.send("customer order created!")
         });
     });
-//
-//     // PUT - Edit customer order
-//     app.put('/customer/edit',function(req,res){
-//       console.log(req.body._id)
-//       console.log(req.body.date)
-//       console.log(req.body.address)
-//
-//     if (req.body._id){
-//         Order.findByIdAndUpdate(req.body._id, {
-//           date : req.body.date,
-//           address: req.body.address,
-//           city : req.body.city,
-//           state : req.body.state,
-//           zip : req.body.zip},
-//             function(err,order){
-//             if (err) throw err;
-//             res.send('customer order updated');
-//         })
-//     };
-// });
-//
-//     //deletes an order
-//     app.delete('/ordersData/:id', function(req, res) {
-//     console.log(req.params.id);
-//     Order.findByIdAndRemove(req.params.id, function(err) {
-//         if (err) throw err;
-//         res.send('Order Deleted');
-//     })
-// });
 
 
     //==========Authentication===========
