@@ -114,8 +114,12 @@ module.exports = function(app){
 
         newOrder.save(function(err){
             if(err)throw err;
+            
+            /* MG - Throwing Error (Error: Can't set headers after they are sent.) */
+            /*
             res.send('order created!');
             res.redirect("delivery_landing");
+            */
         });
     });
 
