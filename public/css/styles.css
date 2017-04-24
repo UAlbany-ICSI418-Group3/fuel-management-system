@@ -77,3 +77,14 @@ img{
   width:10%;
   height:10%;
 }
+
+
+.orderSuccess{
+  text-align: center;
+}
+
+#statusButton{
+  color: green;
+  background-color: green;
+  width: 100%;
+}

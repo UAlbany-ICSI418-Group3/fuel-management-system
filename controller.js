@@ -41,6 +41,7 @@ module.exports = function(app){
 
       //if there is a body in the reqest, do an update
       if(req.body.id){
+
         Fuel.findById(req.body.id, function (err, fuel) {
           if (err) throw err;
 
@@ -55,19 +56,6 @@ module.exports = function(app){
 
          } )
        }
-      //If there is no body, we create a new type of fuel
-      //This probably wont actually be needed
-      // else{
-
-      //   var newFuel= Fuel({
-      //       type:    req.body.type,
-      //       amount:  req.body.amount,
-      //   });
-      //   newFuel.save(function(err){
-      //       if(err)throw err;
-      //       res.redirect("/fuels");
-      //   });
-      // }
     });
 
     //GET - Retreive all fuel types in DB
@@ -97,6 +85,11 @@ module.exports = function(app){
       res.render("delivery_order")
     })
 
+    // GET - Renders Delivery Order Success page
+    app.get("/delivery/success",function(req,res){
+      res.render("delivery_order_success")
+    })
+
     app.get("/delivery/orders",function(req,res){
       Order.find({}, function(err, allOrders){
         if(err){
@@ -124,12 +117,25 @@ module.exports = function(app){
           type: req.body.type,
           price: req.body.price,
         });
+        console.log(req.body.firstName)
 
-        newOrder.save(function(err){
+          if (req.body.id){
+            console.log("found order id" + req.body.id)
+            Order.findByIdAndUpdate(req.body.id, {
+              status: req.body.status,},
+                function(err,order){
+                if (err) throw err;
+                res.send("order updated")
+                console.log('order Updated');
+            })
+        }
+        else{
+          console.log("inside else")
+            newOrder.save(function(err){
             if(err)throw err;
             res.send('order created!');
-            res.redirect("delivery_landing");
         });
+        }
     });
 
     //=============INVENTORY===============
@@ -174,26 +180,35 @@ module.exports = function(app){
       res.render("customer_order")
     })
 
+    app.get("/customer/success", function(req,res){
+      res.render("customer_order_success")
+    })
+
     // POST - Create new Customer order
     // **The customer order should NOT decrement the amount of fuel**
     // Should create a separate customer order model that can then
     // be used by the deliveryman
-//     app.post('/customer', function(req,res){
-//
-//         var newOrder= Order({
-//             date : req.body.date,
-//             address: req.body.address,
-//             city : req.body.city,
-//             state : req.body.state,
-//             zip : req.body.zip,
-//             type : req.body.type,
-//             status : "Active",
-//         });
-//         newOrder.save(function(err){
-//             if(err)throw err;
-//             res.redirect("/");
-//         });
-//     });
+    app.post('/customer/orders',function(req,res){
+
+        var newOrder= Order({
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          dateTime : req.body.dateTime,
+          address: req.body.address,
+          city : req.body.city,
+          state : req.body.state,
+          zip : req.body.zip,
+          status : req.body.status,
+          amount: req.body.amount,
+          type: req.body.type,
+          price: req.body.price,
+        });
+  
+        newOrder.save(function(err){
+          if(err)throw err;
+          res.send("customer order created!")                    
+        });
+    });
 //
 //     // PUT - Edit customer order
 //     app.put('/customer/edit',function(req,res){

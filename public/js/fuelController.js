@@ -3,10 +3,27 @@
     //We'll try to just use this one angular controller for all of our client side javascript
     //We might need more if we run into scoping problems with the variables
 
-    fuelApp.controller('fuelController',['$scope','$http',
-    function($scope,$http){
+    fuelApp.controller('fuelController',['$scope','$http', '$window',
+    function($scope,$http,$window){
 
-      //gets orders
+
+        //Probably wouldn't actually want these hardcoded, but is a quick hack
+      $scope.checkFuelType = function(fuelType){
+        var fuelID = 0
+            if(fuelType == 'Oil'){
+              fuelID = "58f6c93ff09dac76237d911f"
+            }
+            else if(fuelType == 'Propane'){
+            fuelID = "58f6d297ada98b84e775bdcf"
+            }
+            else if(fuelType == 'Gasoline'){
+            fuelID = "58f556c7cee2624033ea93b3"
+            }
+            return fuelID
+      }
+
+
+      //gets all orders
       $http.get('/delivery/orders')
         .success(function(response){
             $scope.orderData = response;
@@ -16,82 +33,106 @@
           console.log(data);
         });
 
-        //posts delivery order...
-        //creates a record of the transaction and substracts amount of total fuel (done on the server)
-        $scope.postOrderFromDelivery = function(){
 
-          //Probably wouldn't actually want these hardcoded, but is a quick hack
-          if($scope.type == 'Oil'){
-            $scope.fuelID = "58f6c93ff09dac76237d911f"
-          }
-          else if($scope.type == 'Propane'){
-            $scope.fuelID = "58f556b2cee2624033ea93b2"
-          }
-          else if($scope.type == 'Gasoline'){
-            $scope.fuelID = "58f556c7cee2624033ea93b3"
-          }
+      //posts delivery order and updates fuel total
+      $scope.postOrderFromDelivery = function(){
 
-          $http.post('/delivery/orders',
-              {
-                firstName: $scope.firstName,
-                lastName: $scope.lastName,
-                dateTime: $scope.dateTime,
-                city: $scope.city,
-                state: $scope.state,
-                zip: $scope.zip,
-                address: $scope.address,
-                amount: $scope.amount,
-                type: $scope.type,
-                price: $scope.price,
-                status: "Delivered"
-                })
-         .success(function (result) {
-              console.log("posted orders!")
+        $http.post('/delivery/orders',
+            {
+              firstName: $scope.firstName,
+              lastName: $scope.lastName,
+              dateTime: $scope.dateTime,
+              city: $scope.city,
+              state: $scope.state,
+              zip: $scope.zip,
+              address: $scope.address,
+              amount: $scope.amount,
+              type: $scope.type,
+              price: $scope.price,
+              status: "Delivered"
+              })
+        .success(function (result) {
+            console.log("posted orders!")
+        })
+        .error(function (data, status) {
+            console.log(data);
+        });
+
+        fuelId =  $scope.checkFuelType($scope.type)
+
+        $http.post('/fuels/delivery',
+            {
+              id: fuelId,
+              type: $scope.type,
+              amount: $scope.amount,
+              })
+        .success(function (result) {
+            console.log("updated fuels!")
+        })
+        .error(function (data, status) {
+            console.log(data);
+        });
+    }
+
+
+    //Posts an order from a customer. Doesn't update fuel total
+    $scope.postOrderFromCustomer = function(){
+
+      $http.post('/customer/orders',
+          {
+            firstName: $scope.firstName,
+            lastName: $scope.lastName,
+            dateTime: $scope.dateTime,
+            city: $scope.city,
+            state: $scope.state,
+            zip: $scope.zip,
+            address: $scope.address,
+            amount: $scope.amount,
+            type: $scope.type,
+            price: $scope.price,
+            status: "Pending"
           })
-          .error(function (data, status) {
-              console.log(data);
-          });
+          .success(function (res) {
+        		$window.location.href = "/customer/success"
+    }, function (res) {
+        console.log("error" + res.type)
+    });
+    console.log("outside")
+          }
 
-          $http.post('/fuels/delivery',
+
+    //updates the status of the order, and the fuel total
+    $scope.updateStatus = function(orderId, type, amount){
+
+      console.log("order id first" + orderId)
+      $http.post('/delivery/orders',
+          {
+            id: orderId,
+            status: "Delivered"
+          })
+          .success(function (res) {
+              console.log("success updating to delivered")
+          })
+        .error(function (err, status) {
+                console.log(err);
+            });
+
+          fuelId =  $scope.checkFuelType(type)
+
+          console.log(fuelId)
+      $http.post('/fuels/delivery',
               {
-                id: $scope.fuelID,
-                type: $scope.type,
-                amount: $scope.amount,
+                id: fuelId,
+                type: type,
+                amount: amount,
                 })
          .success(function (result) {
-              console.log("updated fuels!")
+          console.log("success")
+          $window.location.reload();
+
           })
           .error(function (data, status) {
               console.log(data);
           });
     }
-
-    //gets fuels
-    $http.get('/fuels')
-    .success(function(response){
-      console.log("success")
-        $scope.fuelData = response;
-    })
-    .error(function(data,status){
-    console.log('error!');
-    console.log(data);
-  });
-
-
-    //posts fuels - probably can remove, we shouldn't need to post new fuels
-//     $scope.postFuelFromDelivery = function(){
-//       console.log("here!")
-//       $http.post('/orders',
-//           {
-//             type: $scope.type,
-//             amount: $scope.amount,
-//             })
-//      .success(function (result) {
-//           $scope.msg="posted";
-//           console.log("posted!")
-//       })
-//       .error(function (data, status) {
-//           console.log(data);
-//       });
-// }
   }]);

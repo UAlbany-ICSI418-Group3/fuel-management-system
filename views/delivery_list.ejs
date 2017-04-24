@@ -3,7 +3,6 @@
 <% include ./partials/header %>
 
   <body>
-    <!-- Page Content -->
     <div class="container">
 
         <h2>
@@ -18,7 +17,7 @@
                   <table border=1>
                     <td><b>First Name</b></td>
                     <td><b>Last Name</b></td>
-                	  <td><b>Date</b></td>
+                	<td><b>Date</b></td>
                     <td><b>Address</b></td>
                     <td><b>City</b></td>
                     <td><b>State</b></td>
@@ -27,6 +26,7 @@
                     <td><b>Type of Fuel</b></td>
                     <td><b>Price</td></b>
                     <td><b>Status</b></td>
+                    <td><b>Change Status</b></td>
 
                 	<tr ng-repeat="data in orderData | orderBy:'-'">
                     <td>{{ data.firstName }}</td>
@@ -40,6 +40,8 @@
                     <td>{{ data.type }}</td>
                     <td>{{ data.price }}</td>
                     <td>{{ data.status }}</td>
+                    <td  ng-if="data.status != 'Delivered'"><a class="btn btn-success" 
+                    id="statusButton" ng-click="updateStatus(data._id, data.type, data.amount)"></a></td>
                  	</tr>
                	 </table>
              	 </div>
