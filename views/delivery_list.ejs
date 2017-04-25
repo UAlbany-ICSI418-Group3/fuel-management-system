@@ -17,13 +17,13 @@
                   <table border=1>
                     <td><b>First Name</b></td>
                     <td><b>Last Name</b></td>
-                	<td><b>Date</b></td>
+                	  <td><b>Date</b></td>
                     <td><b>Address</b></td>
                     <td><b>City</b></td>
                     <td><b>State</b></td>
                     <td><b>Zip</b></td>
-                    <td><b>Amount</b></td>
                     <td><b>Type of Fuel</b></td>
+                    <td><b>Amount</b></td>
                     <td><b>Price</td></b>
                     <td><b>Status</b></td>
                     <td><b>Change Status</b></td>
@@ -36,12 +36,19 @@
                     <td>{{ data.city }}</td>
                     <td>{{ data.state }}</td>
                     <td>{{ data.zip }}</td>
-                    <td>{{ data.amount }}</td>
                     <td>{{ data.type }}</td>
-                    <td>{{ data.price }}</td>
+                    <td ng-if="data.amount != 0">{{ data.amount }}</td>
+                    <td ng-if="data.amount == 0"><input class="form-control" type="number" ng-model="data.amountEdit"></td>
+                    <td ng-if="data.price != 0">{{ data.price }}</td>
+                    <td ng-if="data.price == 0"><input class="form-control" type="number" ng-model="data.priceEdit"></td>
                     <td>{{ data.status }}</td>
-                    <td  ng-if="data.status != 'Delivered'"><a class="btn btn-success" 
-                    id="statusButton" ng-click="updateStatus(data._id, data.type, data.amount)"></a></td>
+
+                    <td  ng-if="data.status != 'Delivered'">  <a class="btn btn-primary"
+                    id="pendingButton"  ng-click="updateStatus(data)">Submit</a></td>
+                    <td  ng-if="data.status == 'Delivered'"><a class="btn btn-primary"
+                    id="deliveredButton"></a></td>
+
+
                  	</tr>
                	 </table>
              	 </div>

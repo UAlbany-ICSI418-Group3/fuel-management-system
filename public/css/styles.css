@@ -83,7 +83,12 @@ img{
   text-align: center;
 }
 
-#statusButton{
+#pendingButton{
+  color: yellow;
+  background-color: yellow;
+  width: 100%;
+}
+#deliveredButton{
   color: green;
   background-color: green;
   width: 100%;
