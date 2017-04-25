@@ -77,12 +77,9 @@ img{
   width:10%;
   height:10%;
 }
-
-
 .orderSuccess{
   text-align: center;
 }
-
 #pendingButton{
   color: yellow;
   background-color: yellow;
@@ -91,5 +88,8 @@ img{
 #deliveredButton{
   color: green;
   background-color: green;
+  width: 100%;
+}
+#loginButton{
   width: 100%;
 }

@@ -30,7 +30,7 @@ module.exports = function(app){
 
     // GET - Renders Homepage
     app.get('/',function(req,res){
-        res.render('home', {currentUser:req.user});
+        res.render('login', {currentUser:req.user});
     })
 
 
@@ -248,7 +248,7 @@ module.exports = function(app){
 
     Order.find({status:"Pending"}, function(err,docs){
       res.json(docs);
-      
+
     });
   });
 
@@ -261,15 +261,15 @@ module.exports = function(app){
 
     Order.aggregate([
           { $match: { dateTime: { $gt: start, $lt: end }}},
-          { $group: 
-              { _id: '$type', total_products: { $sum: "$amount" } } 
+          { $group:
+              { _id: '$type', total_products: { $sum: "$amount" } }
           }],
           function (err, docs) {
-          if (err) 
+          if (err)
             return handleError(err);
 
           res.json(docs);
-          }      
+          }
     );
   });
 
@@ -283,15 +283,15 @@ module.exports = function(app){
 
     Order.aggregate([
           { $match: { dateTime: { $gt: start, $lt: end }}},
-          { $group: 
-              { _id: '$type', profit_per_fuel: { $sum: "$price" } } 
+          { $group:
+              { _id: '$type', profit_per_fuel: { $sum: "$price" } }
           }],
           function (err, docs) {
-          if (err) 
+          if (err)
             return handleError(err);
 
           res.json(docs);
-          }      
+          }
     );
   });
 
@@ -323,6 +323,9 @@ module.exports = function(app){
           else if(req.body.type == "delivery"){
             res.redirect("/delivery");
           }
+          else if(req.body.type == "owner"){
+            res.redirect("/owner");
+          }
         });
       });
     });
@@ -353,6 +356,9 @@ module.exports = function(app){
         }
         if (user.type === "delivery"){
           return res.redirect("/delivery");
+        }
+        if (user.type === "owner"){
+          return res.redirect("/owner")
         }
     })(req, res, next);
   });
