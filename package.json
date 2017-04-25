@@ -2,10 +2,13 @@
   "name": "csi418",
   "version": "1.0.0",
   "description": "CSI418 - Software Engineering",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords" :[
+    "heroku"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -17,5 +20,8 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.0.0"
+  },
+  "engines": {
+    "node": "4.1.1"
   }
 }
