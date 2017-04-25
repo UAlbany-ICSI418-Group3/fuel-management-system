@@ -234,8 +234,67 @@ module.exports = function(app){
         });
     });
 
+/* =========================== Owner ============================ */
 
-    //==========Authentication===========
+  /* Renders Owners home page */
+  app.get("/owner/", function(req,res){
+    res.render("owner_landing");
+  })
+
+  /* Query to print out all pending orders */
+  app.get("/owner/pending", function(req,res){
+
+    Order.find({status:"Pending"}, function(err,docs){
+      res.json(docs);
+      
+    });
+  });
+
+  /* Query to print out total fuels sold during a period of time */
+  app.get("/owner/fuelsold", function(req,res){
+
+    /* Probably don't want to hard code for real world, works for this */
+    var start = "2017-01-04T18:00:00.000Z";
+    var end   = "2017-01-06T18:00:00.000Z";
+
+    Order.aggregate([
+          { $match: { dateTime: { $gt: start, $lt: end }}},
+          { $group: 
+              { _id: '$type', total_products: { $sum: "$amount" } } 
+          }],
+          function (err, docs) {
+          if (err) 
+            return handleError(err);
+
+          res.json(docs);
+          }      
+    );
+  });
+
+  /* Query to print out the profit for the sales of each fuel during a */
+  /* specified time                                                    */
+  app.get("/owner/profit", function(req,res){
+
+    /* Probably don't want to hard code for real world, works for this */
+    var start = "2017-01-04T18:00:00.000Z";
+    var end   = "2017-01-06T18:00:00.000Z";
+
+    Order.aggregate([
+          { $match: { dateTime: { $gt: start, $lt: end }}},
+          { $group: 
+              { _id: '$type', profit_per_fuel: { $sum: "$price" } } 
+          }],
+          function (err, docs) {
+          if (err) 
+            return handleError(err);
+
+          res.json(docs);
+          }      
+    );
+  });
+
+
+/* =========================== Authentication ============================ */
 
     //show register form
     app.get("/register", function(req, res){
