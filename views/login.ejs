@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <% include ./partials/header %>
 
-<h1>Login!</h1>
+<div class="container">
+  <div class="row">
+    <h1 class="page-header">Login!</h1>
+    <div style="width: 40%; margin: 30px auto;">
+      <form style="" action="/login" method="POST">
+        <input class="form-control" type="text" name="username" placeholder="username" />
+        <input class="form-control" type="password" name="password" placeholder="password" />
+        <br />
 
-<form action="/login" method="POST">
-  <input type="text" name="username" placeholder="username" />
-  <input type="password" name="password" placeholder="password" />
-  <input type="submit" value="Login!">
-</form>
+        <input id="loginButton" class="btn btn-default" type="submit" value="Login!">
+      </form>
+      <br />
+      <a href="/register">New User?</a>
+    </div>
+  </div>
+</div>
+
+
 
 <% include ./partials/footer %>
