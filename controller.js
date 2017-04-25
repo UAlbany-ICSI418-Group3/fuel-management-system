@@ -123,6 +123,8 @@ module.exports = function(app){
           if (req.body.id){
             console.log("found order id" + req.body.id)
             Order.findByIdAndUpdate(req.body.id, {
+              amount: req.body.amount,
+              price: req.body.price,
               status: req.body.status,},
                 function(err,order){
                 if (err) throw err;

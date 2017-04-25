@@ -87,9 +87,9 @@
             state: $scope.state,
             zip: $scope.zip,
             address: $scope.address,
-            amount: $scope.amount,
+            amount: 0,
             type: $scope.type,
-            price: $scope.price,
+            price: 0,
             status: "Pending"
           })
           .success(function (res) {
@@ -102,12 +102,20 @@
 
 
     //updates the status of the order, and the fuel total
-    $scope.updateStatus = function(orderId, type, amount){
+    $scope.updateStatus = function(data){
 
-      console.log("order id first" + orderId)
+    //  console.log("order id first" + orderId)
+      console.log("am: "+ data.amountEdit)
+      console.log("price " + data.priceEdit)
+      console.log("id " + data._id)
+      console.log("type" + data.type)
+
+
       $http.post('/delivery/orders',
           {
-            id: orderId,
+            id: data._id,
+            price: data.priceEdit,
+            amount: data.amountEdit,
             status: "Delivered"
           })
           .success(function (res) {
@@ -117,14 +125,13 @@
                 console.log(err);
             });
 
-          fuelId =  $scope.checkFuelType(type)
+          fuelId =  $scope.checkFuelType(data.type)
 
-          console.log(fuelId)
+        //  console.log(fuelId)
       $http.post('/fuels/delivery',
               {
                 id: fuelId,
-                type: type,
-                amount: amount,
+                amount: data.amountEdit,
                 })
          .success(function (result) {
           console.log("success")
