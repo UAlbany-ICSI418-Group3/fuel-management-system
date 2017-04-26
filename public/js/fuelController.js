@@ -197,9 +197,9 @@
         {
           startDate = $scope.sDate,
           endDate = $scope.eDate,
-        }
+        })
           .success(function (result) {
-              console.log("updated fuels!")
+              console.log("updated fuels!");
           })
           .error(function (data, status) {
               console.log(data);
