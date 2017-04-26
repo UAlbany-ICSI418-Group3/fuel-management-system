@@ -78,26 +78,28 @@
     //Posts an order from a customer. Doesn't update fuel total
     $scope.postOrderFromCustomer = function(){
 
-      $http.post('/customer/orders',
-          {
-            firstName: $scope.firstName,
-            lastName: $scope.lastName,
-            dateTime: $scope.dateTime,
-            city: $scope.city,
-            state: $scope.state,
-            zip: $scope.zip,
-            address: $scope.address,
-            amount: 0,
-            type: $scope.type,
-            price: 0,
-            status: "Pending"
-          })
-          .success(function (res) {
-        		$window.location.href = "/customer/success"
-    }, function (res) {
-        console.log("error" + res.type)
-    });
-    console.log("outside")
+      console.log($scope.firstName)
+
+    //   $http.post('/customer/orders',
+    //       {
+    //         firstName: $scope.firstName,
+    //         lastName: $scope.lastName,
+    //         dateTime: $scope.dateTime,
+    //         city: $scope.city,
+    //         state: $scope.state,
+    //         zip: $scope.zip,
+    //         address: $scope.address,
+    //         amount: 0,
+    //         type: $scope.type,
+    //         price: 0,
+    //         status: "Pending"
+    //       })
+    //       .success(function (res) {
+    //     		$window.location.href = "/customer/success"
+    // }, function (res) {
+    //     console.log("error" + res.type)
+    // });
+    // console.log("outside")
   }
 
 
@@ -199,24 +201,29 @@
   });
 
 
-     $scope.QueryTwoDates = function(){
-        $http.get('/fuelsolddata',
-        {
-          startDate = $scope.sDate,
-          endDate = $scope.eDate,
-        }
-          .success(function (result) {
-              console.log("updated fuels!")
-          })
-          .error(function (data, status) {
-              console.log(data);
-          });
+     $scope.queryDates = function(){
+
+       console.log("here: " + $scope.sDate)
+       // Updates amount of fuels
+       $http.post('/fuelsolddata2',
+           {
+             eDate: $scope.eDate,
+             sDate: $scope.sDate,
+             })
+      .success(function (result) {
+            console.log("result: " + result)
+           console.log("SUCCESSS!")
+       })
+       .error(function (data, status) {
+           console.log(data);
+       });
 
      }
-      
-    $http.get('/fuelsolddata').success(function(response){
-          $scope.fuelSoldData = response;
-      });
+
+
+    // $http.get('/fuelsolddata').success(function(response){
+    //       $scope.fuelSoldData = response;
+    //   });
 
     $http.get('/profitdata').success(function(response){
           $scope.profitData = response;
