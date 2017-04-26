@@ -180,6 +180,7 @@
           });
     }
 
+
     $http.get('/fuels')
     .success(function(response){
       console.log("success")
@@ -189,5 +190,34 @@
     console.log('error!');
     console.log(data);
   });
+
+
+     $scope.QueryTwoDates = function(){
+        $http.get('/fuelsolddata',
+        {
+          startDate = $scope.sDate,
+          endDate = $scope.eDate,
+        }
+          .success(function (result) {
+              console.log("updated fuels!")
+          })
+          .error(function (data, status) {
+              console.log(data);
+          });
+
+     }
+      
+    $http.get('/fuelsolddata').success(function(response){
+          $scope.fuelSoldData = response;
+      });
+
+    $http.get('/profitdata').success(function(response){
+          $scope.profitData = response;
+      });
+
+    $http.get('/pendingorderdata').success(function(response){
+          $scope.pendingOrderData = response;
+      });
+
 
   }]);

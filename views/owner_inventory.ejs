@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<% include ./partials/header %>
+
+<body>
+
+    <!-- Page Content -->
+    <div class="container">
+        <h2>
+        <u>Inventory: </u>
+
+        <p align="right"><a href="/owner" class=" btn btn-lg btn-primary">Back</a></p>
+
+         </h2>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div ng-controller="fuelController">
+                        <table border=1>
+                            <td><b>Type</b</td>
+                            <td><b>Amount</b></td>
+                            <tr ng-repeat="data in fuelData">
+                                <td>{{ data.type}}</td>
+                                <td>{{ data.amount }}</td>
+                            </tr>
+                        </table>
+                 </div>
+            </div>
+        </div>
+</body>
+
+<% include ./partials/footer %>

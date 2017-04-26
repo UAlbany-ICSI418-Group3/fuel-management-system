@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<% include ./partials/header %>
+
+  <body>
+    <div class="container" ng-controller="fuelController">
+
+        <h2>
+
+        <p align="right"><a href="/owner" class="btn btn-lg btn-primary">Back</a><p>
+        		<center>Profit and Total Fuel Sales</center>
+         </h2>
+
+        Start Date:       <input class="form-control" type="datetime-local" ng-model="sDate"/>
+        End Date:       <input class="form-control" type="datetime-local" ng-model="eDate"/>
+        <a href="#" class="btn btn-default" ng-click="queryDates()">Submit</a>
+        <br><br><br>
+
+        
+        <div class="row">
+            <div class="col-lg-12">
+                	
+                  <div style="width: 65%; margin: 10px auto;">
+                  <table style="display: inline-block; border: 1px solid; float: left; ">
+                    <td><b>Type</b></td>
+                    <td><b>Profit</b></td>
+                	<tr ng-repeat="data in profitData | orderBy:'-'">
+                    <td>{{ data._id }}</td>
+                    <td>${{ data.profit_per_fuel}}</td>
+                 	</tr>
+               		</table>
+               		<div>
+
+               	 	<div style="width: 70%; margin: 10px auto;">
+               	    <table style="display: inline-block; border: 1px solid;float: right; ">
+                    <td><b>Type</b></td>
+                    <td><b>Amount Sold</b></td>
+                	<tr ng-repeat="dat in fuelSoldData| orderBy:'-'">
+                    <td>{{ dat._id }}</td>
+                    <td>{{ dat.total_products}} gallons</td>
+                 	</tr>
+               	 	</table>
+               	 	</div>
+
+
+            </div>
+        </div>
+      </body>
+</html>
+<br><br><br><br><br>	
+<% include ./partials/footer %>
