@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <% include ./partials/header %>
 
+<h1><center>Owner Dashboard<center></h1><br>
 
+<div style="width: 80%; margin: 10px auto;">
+<h3><u>Inventory</u></h3>
+	<h4><a href="/owner/inventorylist" class="button">View Inventory</a></h4>
+
+<h3><u>Orders</u></h3>
+	<h4><a href="/owner/pendingorders" class="button">View Pending Orders</a></h4>
+	<h4><a href="/owner/orderlist" class="button">View All Orders</a></h4>
+
+<h3><u>Report</u></h3>
+	<h4><a href="/owner/report" class="button">View Sales and Profit Report</a></h4>
+
+</div>
 
 <% include ./partials/footer %>
