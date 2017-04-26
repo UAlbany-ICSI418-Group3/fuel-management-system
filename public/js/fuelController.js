@@ -201,6 +201,7 @@
   });
 
 
+<<<<<<< HEAD
      $scope.queryDates = function(){
 
        console.log("here: " + $scope.sDate)
@@ -217,6 +218,20 @@
        .error(function (data, status) {
            console.log(data);
        });
+// =======
+//      $scope.QueryTwoDates = function(){
+//         $http.get('/fuelsolddata',
+//         {
+//           startDate = $scope.sDate,
+//           endDate = $scope.eDate,
+//         })
+//           .success(function (result) {
+//               console.log("updated fuels!");
+//           })
+//           .error(function (data, status) {
+//               console.log(data);
+//           });
+// >>>>>>> ce8c6e3270759f339186928a081d54f8bc0c94bf
 
      }
 
