@@ -244,7 +244,7 @@ module.exports = function(app){
   })
 
   /* Query to print out all pending orders */
-  app.get("/owner/pending", function(req,res){
+  app.get("/pendingorderdata", function(req,res){
 
     Order.find({status:"Pending"}, function(err,docs){
       res.json(docs);
@@ -252,12 +252,45 @@ module.exports = function(app){
     });
   });
 
-  /* Query to print out total fuels sold during a period of time */
-  app.get("/owner/fuelsold", function(req,res){
+
+  // /* Query to print out total fuels sold during a period of time */
+  // app.get("/fuelsolddata", function(req,res){
+  //
+  //   //console.log("IN HERE" + req.body.sDate)
+  //
+  //   start = req.body.sDate
+  //   end = req.body.eDate
+  // //  console.log("here!!!!! : " + start)
+  //
+  //   /* Probably don't want to hard code for real world, works for this */
+  // //  var start = "2016-01-04T18:00:00.000Z";
+  // //  var end   = "2018-01-06T18:00:00.000Z";
+  //
+  //   Order.aggregate([
+  //         { $match: { dateTime: { $gt: start, $lt: end }}},
+  //         { $group:
+  //             { _id: '$type', total_products: { $sum: "$amount" } }
+  //         }],
+  //         function (err, docs) {
+  //         if (err)
+  //           return handleError(err);
+  //
+  //         res.json(docs);
+  //         }
+  //   );
+  // });
+
+  app.post("/fuelsolddata2", function(req,res){
+
+  //  console.log("IN HERE" + req.body.sDate)
+
+     start = req.body.sDate
+     end = req.body.eDate
+    console.log("here!!!!! : " + start)
 
     /* Probably don't want to hard code for real world, works for this */
-    var start = "2017-01-04T18:00:00.000Z";
-    var end   = "2017-01-06T18:00:00.000Z";
+  //  var start = "2016-01-04T18:00:00.000Z";
+  //  var end   = "2018-01-06T18:00:00.000Z";
 
     Order.aggregate([
           { $match: { dateTime: { $gt: start, $lt: end }}},
@@ -268,18 +301,21 @@ module.exports = function(app){
           if (err)
             return handleError(err);
 
-          res.json(docs);
+          //  return docs
+          console.log(res.json(docs))
+          return res.json(docs);
           }
+        //  return res.json(docs);
     );
   });
 
   /* Query to print out the profit for the sales of each fuel during a */
   /* specified time                                                    */
-  app.get("/owner/profit", function(req,res){
+  app.get("/profitdata", function(req,res){
 
     /* Probably don't want to hard code for real world, works for this */
-    var start = "2017-01-04T18:00:00.000Z";
-    var end   = "2017-01-06T18:00:00.000Z";
+    var start = "2016-01-04T18:00:00.000Z";
+    var end   = "2018-01-06T18:00:00.000Z";
 
     Order.aggregate([
           { $match: { dateTime: { $gt: start, $lt: end }}},
@@ -295,6 +331,20 @@ module.exports = function(app){
     );
   });
 
+  app.get("/owner/report", function(req,res){
+      res.render("owner_report");
+  })
+
+  app.get("/owner/pendingorders", function(req,res){
+      res.render("owner_orderspending");
+  })
+
+  app.get("/owner/inventorylist", function(req,res){
+      res.render("owner_inventory");
+  })
+  app.get("/owner/orderlist", function(req,res){
+      res.render("owner_orderlist");
+  })
 
 /* =========================== Authentication ============================ */
 
