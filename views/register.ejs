@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <% include ./partials/header %>
 
-<h1>Register!</h1>
+<div class="container">
+  <div class="row">
+    <h1 class="page-header">Register!</h1>
+    <div style="width: 40%; margin: 30px auto;">
+      <form action="/register" method="post">
+        <input class="form-control" type="text" name="username" placeholder="username" />
+        <input class="form-control" type="password" name="password" placeholder="password" />
+        <br />
 
-<form action="/register" method="post">
-  <input type="text" name="username" placeholder="username" />
-  <input type="password" name="password" placeholder="password" />
-  <select name="type">
-    <option value="customer">Customer</option>
-    <option value="inventory">Inventory Manager</option>
-    <option value="delivery">Delivery Driver</option>
-  </select>
-  <button>Sign Up</button>
-</form>
+          What kind of user?<select style="margin-left: 60px" name="type">
+          <option value="customer">Customer</option>
+          <option value="inventory">Inventory Manager</option>
+          <option value="delivery">Delivery Driver</option>
+          <option value="owner">Owner</option>
+        </select>
+        <br /><br />
+        <button id="loginButton" class="btn btn-primary">Sign Up!</button>
+      </form>
+      <br />
+      <a href="/register">Already registered?</a>
+    </div>
+  </div>
+</div>
+
 
 <% include ./partials/footer %>
