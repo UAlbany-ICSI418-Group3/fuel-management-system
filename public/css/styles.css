@@ -93,64 +93,33 @@ img{
 #loginButton{
   width: 100%;
 }
-/*
-h1,h2 {
-	font-family:  Andale Mono,serif;
-	 font-weight: bold;
-    font-size: 350%;
 
-}
-p {
-    margin: 5%
-}
-h2 {
-	margin:1%;
-}
-h2{
-	 border-width:5px;
-    border-style:groove;
-}
-ul li,h3{
-	font-family:  Andale Mono,serif;
-	font-size: 150%;
-}
-
-
-p.andale {
-    font-family:  Andale Mono,serif;
-	font-size: 200%;
-}
-
-p.sansserif {
-    font-family: Arial, Helvetica, sans-serif;
-	font-size: 100%;
-}
-h1	{
-	margin:2cm 2cm 4cm 2cm;
-}
-
-.thumbnailCustomer{
-   background-image: url("http://inchoo.net/wp-content/uploads/2014/12/customer-group-featured.jpg");
-    background-color: #ffffff;
-	 background-repeat:no-repeat;
-	 background-position:50% 19%;
-	 background-size:75%;
-}
 
 .thumbnailDriver{
    background-image: url("https://cdn.dribbble.com/users/1101613/screenshots/2570562/delivery-truck.gif");
-    background-color: #ffffff;
+   background-color: #ffffff;
 	 background-repeat:no-repeat;
 	 background-position:50% 59%;
 	 background-size:85%;
+   height:100px;
+   width:350px;
+ 	 border-style:groove;
 
 }
 .thumbnailInventory{
    background-image: url("http://acctivate.com/wp-content/uploads/2016/03/small-business-inventory-control-challenges.jpg");
-    background-color: #ffffff;
+   background-color: #ffffff;
 	 background-repeat:no-repeat;
-
 	 background-position:50% 59%;
 	 background-size:60%;
-
-}*/
+   height:100px;
+ 	 width:350px;
+ 	 border-style:groove;
+}
+.thumbnailOrders{
+   background-color: #ffffff;
+	 background-repeat:no-repeat;
+   height:220px;
+ 	 width:350px;
+ 	 border-style:groove;
+}
