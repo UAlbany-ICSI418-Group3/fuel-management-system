@@ -27,7 +27,7 @@
                     <td><b>Price</td></b>
                     <td><b>Status</b></td>
 
-                	<tr ng-repeat="data in orderData | orderBy:'-'">
+                	<tr ng-repeat="data in orderData | orderBy: ['-status','dateTime']">
                     <td>{{ data.firstName }}</td>
                     <td>{{ data.lastName }}</td>
                     <td>{{ data.dateTime | date:'MM/dd/yyyy @ h:mma' }}</td>

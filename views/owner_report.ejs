@@ -4,13 +4,17 @@
 <div ng-controller="fuelController">
   <div class="container">
     <div class="row">
-      <h1 class="page-header">Profit and Total Fuel Sales</h1>
+      <h1 class="page-header">Profit and Total Fuel Sales Report</h1>
       <div style="width: 40%; margin: 30px auto;">
-        <br>
-        Start Date: <input class="form-control" type="date" ng-model="sDate"/>
-        End Date:  <input class="form-control" type="date" ng-model="eDate"/>
+        <center>Enter a Start Date and an End Date to calculate the total profit total sales during the two dates. (Note: Start Date <i>must</i> precede End Date)
+        </center>
 
         <br><br>
+
+        <b>Start Date:</b> <input class="form-control" type="date" ng-model="sDate"/>
+        <b>End Date:</b>  <input class="form-control" type="date" ng-model="eDate"/>
+
+        <br>
         <a href="#" class="btn btn-default"
         ng-click="queryDates()">Submit</a>
 
@@ -23,9 +27,9 @@
 
             <div style="width: 65%; margin: 10px auto;">
             <table style="display: inline-block; border: 1px solid; float: left; ">
-              <td><b>Type</b></td>
-              <td><b>Profit</b></td>
-            <tr ng-repeat="data in profitData | orderBy:'-'">
+              <td><b>Type of Fuel</b></td>
+              <td><b>Total Profit</b></td>
+            <tr ng-repeat="data in profitData | orderBy:'-profit_per_fuel'">
               <td>{{ data._id }}</td>
               <td>${{ data.profit_per_fuel}}</td>
             </tr>
@@ -34,9 +38,9 @@
 
             <div style="width: 70%; margin: 10px auto;">
               <table style="display: inline-block; border: 1px solid;float: right; ">
-              <td><b>Type</b></td>
-              <td><b>Amount Sold</b></td>
-            <tr ng-repeat="dat in fuelSoldData| orderBy:'-'">
+              <td><b>Type of Fuel</b></td>
+              <td><b>Total Amount Sold</b></td>
+            <tr ng-repeat="dat in fuelSoldData| orderBy:'-total_products'">
               <td>{{ dat._id }}</td>
               <td>{{ dat.total_products}} gallons</td>
             </tr>

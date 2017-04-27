@@ -26,7 +26,7 @@
                     <td><b>Type of Fuel</b></td>
                     <td><b>Price</td></b>
 
-                  <tr ng-repeat="data in pendingOrderData | orderBy:'-'">
+                  <tr ng-repeat="data in pendingOrderData | orderBy:'dateTime'">
                     <td>{{ data.firstName }}</td>
                     <td>{{ data.lastName }}</td>
                     <td>{{ data.dateTime | date:'MM/dd/yyyy @ h:mma' }}</td>
