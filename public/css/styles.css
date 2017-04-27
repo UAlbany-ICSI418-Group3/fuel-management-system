@@ -57,7 +57,7 @@ html *
   font-style: italic;
   text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
   height: 100%;
-  background-image: url("http://i67.tinypic.com/t8oinb.png");
+  background-image: url("http://imagizer.imageshack.us/a/img922/9901/WGpHKu.png");
   background-repeat: no-repeat;
   background-size: 1000px 300px;
   background-position: center;
@@ -107,25 +107,23 @@ p.andale {
 }
 
 .thumbnailDriver{
-   background-image: url("https://cdn.dribbble.com/users/1101613/screenshots/2570562/delivery-truck.gif");
+   margin-top: 50px;
+   text-align: center;
    background-color: #ffffff;
-	 background-repeat:no-repeat;
-	 background-position:50% 59%;
-	 background-size:85%;
+   background-repeat:no-repeat;
    height:100px;
    width:350px;
- 	 border-style:groove;
+   border-style:groove;
 
 }
 .thumbnailInventory{
-   background-image: url("http://acctivate.com/wp-content/uploads/2016/03/small-business-inventory-control-challenges.jpg");
+   margin-top: 50px;
+   text-align: center;
    background-color: #ffffff;
-	 background-repeat:no-repeat;
-	 background-position:50% 59%;
-	 background-size:60%;
+   background-repeat:no-repeat;
    height:100px;
- 	 width:350px;
- 	 border-style:groove;
+   width:350px;
+   border-style:groove;
 }
 .thumbnailOrders{
   margin-top: 50px;
@@ -158,10 +156,16 @@ p.andale {
   background-position: center;
 }
 #contactPage {
-   background-image: url("https://photos-6.dropbox.com/t/2/AAA4Sv3DuoQ19k3lQp4qqKPNIFW6K2VsH4J1Xp_NRpOiXg/12/665270286/jpeg/32x32/1/_/1/2/fuels-splash-gasoline-header-xl.jpg/EMah47YFGAQgAigC/fHj4v7B5UVbUXgXs7v_oZpJjsaCAN9Sn6acMpi1bo9M?size=2048x1536&size_mode=3");
-    background-color: #ffffff;
-	 background-repeat:no-repeat;
-	 background-position:2% 140%;
+  background-image: url("https://www.exxon.com/~/media/amer/us/retail/quality-fuels/our-fuels/ethanol/fuels-splash-ethanol-header-xl.jpg");
+  background-color: #ffffff;
+  background-repeat:no-repeat;
+  margin-bottom: -100px;
+  padding-bottom: 400px;
+  padding-left: 50px;
+  padding-right: 50px;
+  background-size: 100% 75%;
+  background-position: center;
+
 }
 #aboutFooter{
   margin-top: 40px;
