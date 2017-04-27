@@ -50,16 +50,16 @@ html *
 }
 
 .jumbotron{
-  padding-bottom: 125px;
+  padding-bottom:335px;
   background-color: white;
   color: white;
   margin-top: 20px;
   font-style: italic;
   text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
   height: 100%;
-  background-image: url("https://article.images.consumerreports.org/h_436,w_598/prod/content/dam/cro/news_articles/cars/CRO_cars_fuel_economy_oil_rig_05-13");
+  background-image: url("http://i67.tinypic.com/t8oinb.png");
   background-repeat: no-repeat;
-  background-size: 875px 300px;
+  background-size: 1000px 300px;
   background-position: center;
 
 }
@@ -72,7 +72,7 @@ html *
 
 h2{
   text-decoration: underline;
-  color: #0000b3;
+  color: #000000;
   font-size: 2em;
 }
 
