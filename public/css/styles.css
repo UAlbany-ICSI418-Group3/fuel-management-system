@@ -108,7 +108,9 @@ p.andale {
 
 .thumbnailDriver{
    margin-top: 50px;
-   text-align: center;
+   background-image: url("https://cdn.dribbble.com/users/1101613/screenshots/2570562/delivery-truck.gif");
+   background-size:50%;
+    background-position:50% 70%;
    background-color: #ffffff;
    background-repeat:no-repeat;
    height:100px;
@@ -118,7 +120,9 @@ p.andale {
 }
 .thumbnailInventory{
    margin-top: 50px;
-   text-align: center;
+  background-image: url("http://acctivate.com/wp-content/uploads/2016/03/small-business-inventory-control-challenges.jpg");
+	 background-size:50%;
+	 background-position:50% 100%;
    background-color: #ffffff;
    background-repeat:no-repeat;
    height:100px;
@@ -127,17 +131,23 @@ p.andale {
 }
 .thumbnailOrders{
   margin-top: 50px;
+  background-image: url("https://www.celerant.com/wp-content/uploads/2016/09/invv.png");
+   background-size:40%;
+    background-position:35% 100%;
    background-color: #ffffff;
 	 background-repeat:no-repeat;
    height:100px;
  	 width:350px;
-   text-align: center;
+   
 
  	 border-style:groove;
 }
 .thumbnailReport{
    margin-top: 50px;
-   text-align: center;
+   
+   background-image: url("http://www.freeiconspng.com/uploads/call-report-icon-3.png");
+   background-size:30%;
+    background-position:70% 100%;
    background-color: #ffffff;
 	 background-repeat:no-repeat;
    height:100px;
