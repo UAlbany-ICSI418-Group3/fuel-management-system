@@ -67,7 +67,8 @@
               amount: $scope.amount,
               })
         .success(function (result) {
-            console.log("updated fuels!")
+          $window.location.href = "/delivery/success"
+
         })
         .error(function (data, status) {
             console.log(data);
@@ -174,7 +175,7 @@
                 amount: $scope.amount,
                 })
          .success(function (result) {
-              console.log("updated fuels!")
+           $window.location.href = "/inventory/success"
           })
           .error(function (data, status) {
               console.log(data);

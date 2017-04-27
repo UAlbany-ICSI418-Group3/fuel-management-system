@@ -158,6 +158,10 @@ module.exports = function(app){
       res.render("inventory_list")
     })
 
+    app.get("/inventory/success",function(req,res){
+      res.render("inventory_order_success")
+    })
+
     /* POST - Puts new shipment in database */
     app.post("/inventory/order",function(req,res){
 
@@ -212,8 +216,6 @@ module.exports = function(app){
 
     // POST - Create new Customer order
     // **The customer order should NOT decrement the amount of fuel**
-    // Should create a separate customer order model that can then
-    // be used by the deliveryman
     app.post('/customer/orders',function(req,res){
 
         var newOrder= Order({
