@@ -4,54 +4,57 @@
 <!-- <<<<<<< HEAD -->
 <h1><center>Owner Dashboard<center></h1><br>
 
-<div style="width: 80%; margin: 10px auto;">
-<h3><u>Inventory</u></h3>
-	<h4><a href="/owner/inventorylist" class="button">View Inventory</a></h4>
+<div class="row" style="width: 90%; margin: 50px auto;">
 
-<h3><u>Orders</u></h3>
-	<h4><a href="/owner/pendingorders" class="button">View Pending Orders</a></h4>
-	<h4><a href="/owner/orderlist" class="button">View All Orders</a></h4>
 
-<h3><u>Report</u></h3>
-	<h4><a href="/owner/report" class="button">View Sales and Profit Report</a></h4>
+     <div class="col-md-6 col-sm-6 col-xs-6">
+          <div class="thumbnailDriver">
+								<p>Delivery Driver</p>
+                  <p>
+                      <a href="/delivery" class="btn btn-primary">Go!</a>
+                  </p>
 
+          </div>
+      </div>
+
+      <div class="col-md-6 col-sm-6 col-xs-6">
+          <div class="thumbnailInventory">
+              <div class="caption">
+                  <p>Inventory</p>
+                  <p>
+                      <a href="/inventory" class="btn btn-primary">Go!</a>
+                  </p>
+              </div>
+          </div>
+      </div>
+
+			<div class="col-md-6 col-sm-6 col-xs-6">
+          <div class="thumbnailOrders">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+									<p>Pending Orders</p>
+                  <p>
+                   <a id="orderButton" href="/owner/pendingorders" class="btn btn-primary">Go!</a>
+                  </p>
+                </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+									<p>All Orders</p>
+									<p>
+                   <a id="orderButton" href="/owner/orderlist" class="btn btn-primary">Go!</a>
+                  </p>
+                </div>
+          </div>
+      </div>
+			<div class="col-md-6 col-sm-6 col-xs-6">
+					<div class="thumbnailReport">
+									<p>View Sales and Profit Report</p>
+									<p>
+									 <a href="/owner/report" class="btn btn-primary">Go!</a>
+									</p>
+					</div>
+			</div>
 </div>
-            <!-- <div class="col-md-6 col-sm-6 col-xs-6">
-                <div class="thumbnail">
-                    <div class="caption">
-                        <h2>Delivery Driver</h2>
-                        <p>
-                            <a href="/delivery" class="btn btn-primary">Go!</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <div class="thumbnail">
-                    <div class="caption">
-                        <h2>Inventory Manager</h2>
-                        <p>
-                            <a href="/inventory" class="btn btn-primary">Go!</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <div class="thumbnail">
-                    <div class="caption">
-                        <h2>Owner</h2>
-                        <p>
-                            <a href="/owner" class="btn btn-primary">Go!</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</body> -->
 
 
 <% include ./partials/footer %>

@@ -345,6 +345,16 @@ module.exports = function(app){
         });
       });
     });
+	
+	//about page
+	app.get("/about",function(req,res){
+			res.render("about");
+	})
+	
+	//contact page
+	app.get("/contact",function(req,res){
+				res.render("contact");
+	})
     //show login form
     app.get("/login", function(req,res){
       res.render("login");
