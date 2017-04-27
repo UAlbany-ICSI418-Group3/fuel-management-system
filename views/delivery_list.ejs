@@ -28,7 +28,7 @@
                     <td><b>Status</b></td>
                     <td><b>Change Status</b></td>
 
-                	<tr ng-repeat="data in orderData | orderBy: ['-status','dateTime']">
+                	<tr ng-repeat="data in orderData | orderBy: ['-status','-dateTime']">
                     <td>{{ data.firstName }}</td>
                     <td>{{ data.lastName }}</td>
                     <td>{{ data.dateTime | date:'MM/dd/yyyy @ h:mma' }}</td>
