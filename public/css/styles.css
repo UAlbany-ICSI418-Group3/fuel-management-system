@@ -3,9 +3,11 @@ table, th , td  {
   border-collapse: collapse;
   padding: 5px;
 }
+
 table tr:nth-child(even) {
   background-color: #f1f1f1;
 }
+
 table tr:nth-child(odd) {
   background-color: #ffffff;
 }
@@ -16,8 +18,10 @@ html *
 }
 
 .footer {
+  margin-top: 250px;
   padding: 1rem;
   text-align: right;
+  background-color: #F0F8FF;
 }
 .btn {
   width: 20%;
@@ -93,7 +97,14 @@ img{
 #loginButton{
   width: 100%;
 }
+#orderButton{
+  width: 55%;
+}
 
+p.andale {
+    font-family:  Andale Mono,serif;
+	  font-size: 100%;
+}
 
 .thumbnailDriver{
    background-image: url("https://cdn.dribbble.com/users/1101613/screenshots/2570562/delivery-truck.gif");
@@ -117,9 +128,42 @@ img{
  	 border-style:groove;
 }
 .thumbnailOrders{
+  margin-top: 50px;
    background-color: #ffffff;
 	 background-repeat:no-repeat;
-   height:220px;
+   height:100px;
+ 	 width:350px;
+   text-align: center;
+
+ 	 border-style:groove;
+}
+.thumbnailReport{
+   margin-top: 50px;
+   text-align: center;
+   background-color: #ffffff;
+	 background-repeat:no-repeat;
+   height:100px;
  	 width:350px;
  	 border-style:groove;
+}
+#aboutPage{
+  background-image: url("https://www.exxon.com/~/media/amer/us/retail/quality-fuels/our-fuels/ethanol/fuels-splash-ethanol-header-xl.jpg");
+  background-color: #ffffff;
+  background-repeat:no-repeat;
+  margin-bottom: -100px;
+  padding-bottom: 400px;
+  padding-left: 50px;
+  padding-right: 50px;
+  background-size: 100% 75%;
+  background-position: center;
+}
+#contactPage {
+   background-image: url("https://photos-6.dropbox.com/t/2/AAA4Sv3DuoQ19k3lQp4qqKPNIFW6K2VsH4J1Xp_NRpOiXg/12/665270286/jpeg/32x32/1/_/1/2/fuels-splash-gasoline-header-xl.jpg/EMah47YFGAQgAigC/fHj4v7B5UVbUXgXs7v_oZpJjsaCAN9Sn6acMpi1bo9M?size=2048x1536&size_mode=3");
+    background-color: #ffffff;
+	 background-repeat:no-repeat;
+	 background-position:2% 140%;
+}
+#aboutFooter{
+  margin-top: 40px;
+  text-align: right;
 }
