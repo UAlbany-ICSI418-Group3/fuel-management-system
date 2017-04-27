@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<% include ./partials/header %>
+<div ng-controller="fuelController">
+  <div class="container">
+    <div class="row">
+      <h1 class="page-header">Profit and Total Fuel Sales</h1>
+      <div style="width: 40%; margin: 30px auto;">
+        <br>
+        Start Date: <input class="form-control" type="date" ng-model="sDate"/>
+        End Date:  <input class="form-control" type="date" ng-model="eDate"/>
+
+        <br><br>
+        <a href="#" class="btn btn-default"
+        ng-click="queryDates()">Submit</a>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+      <div class="col-lg-12">
+
+            <div style="width: 65%; margin: 10px auto;">
+            <table style="display: inline-block; border: 1px solid; float: left; ">
+              <td><b>Type</b></td>
+              <td><b>Profit</b></td>
+            <tr ng-repeat="data in profitData | orderBy:'-'">
+              <td>{{ data._id }}</td>
+              <td>${{ data.profit_per_fuel}}</td>
+            </tr>
+            </table>
+            <div>
+
+            <div style="width: 70%; margin: 10px auto;">
+              <table style="display: inline-block; border: 1px solid;float: right; ">
+              <td><b>Type</b></td>
+              <td><b>Amount Sold</b></td>
+            <tr ng-repeat="dat in fuelSoldData| orderBy:'-'">
+              <td>{{ dat._id }}</td>
+              <td>{{ dat.total_products}} gallons</td>
+            </tr>
+            </table>
+            </div>
+
+
+      </div>
+  </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+
+<% include ./partials/footer %>

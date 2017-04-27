@@ -158,6 +158,10 @@ module.exports = function(app){
       res.render("inventory_list")
     })
 
+    app.get("/inventory/success",function(req,res){
+      res.render("inventory_order_success")
+    })
+
     /* POST - Puts new shipment in database */
     app.post("/inventory/order",function(req,res){
 
@@ -212,8 +216,6 @@ module.exports = function(app){
 
     // POST - Create new Customer order
     // **The customer order should NOT decrement the amount of fuel**
-    // Should create a separate customer order model that can then
-    // be used by the deliveryman
     app.post('/customer/orders',function(req,res){
 
         var newOrder= Order({
@@ -244,7 +246,7 @@ module.exports = function(app){
   })
 
   /* Query to print out all pending orders */
-  app.get("/owner/pending", function(req,res){
+  app.get("/pendingorderdata", function(req,res){
 
     Order.find({status:"Pending"}, function(err,docs){
       res.json(docs);
@@ -252,12 +254,13 @@ module.exports = function(app){
     });
   });
 
-  /* Query to print out total fuels sold during a period of time */
-  app.get("/owner/fuelsold", function(req,res){
 
-    /* Probably don't want to hard code for real world, works for this */
-    var start = "2017-01-04T18:00:00.000Z";
-    var end   = "2017-01-06T18:00:00.000Z";
+  /* Query to print out total fuels sold during a period of time */
+
+  app.get("/fuelsolddata", function(req,res){
+
+    var start = req.query.start
+    var end = req.query.end
 
     Order.aggregate([
           { $match: { dateTime: { $gt: start, $lt: end }}},
@@ -268,18 +271,17 @@ module.exports = function(app){
           if (err)
             return handleError(err);
 
-          res.json(docs);
+          res.json(docs)
           }
     );
   });
 
   /* Query to print out the profit for the sales of each fuel during a */
   /* specified time                                                    */
-  app.get("/owner/profit", function(req,res){
+  app.get("/profitdata", function(req,res){
 
-    /* Probably don't want to hard code for real world, works for this */
-    var start = "2017-01-04T18:00:00.000Z";
-    var end   = "2017-01-06T18:00:00.000Z";
+    var start = req.query.start
+    var end = req.query.end
 
     Order.aggregate([
           { $match: { dateTime: { $gt: start, $lt: end }}},
@@ -295,6 +297,20 @@ module.exports = function(app){
     );
   });
 
+  app.get("/owner/report", function(req,res){
+      res.render("owner_report");
+  })
+
+  app.get("/owner/pendingorders", function(req,res){
+      res.render("owner_orderspending");
+  })
+
+  app.get("/owner/inventorylist", function(req,res){
+      res.render("owner_inventory");
+  })
+  app.get("/owner/orderlist", function(req,res){
+      res.render("owner_orderlist");
+  })
 
 /* =========================== Authentication ============================ */
 

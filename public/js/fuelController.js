@@ -67,7 +67,8 @@
               amount: $scope.amount,
               })
         .success(function (result) {
-            console.log("updated fuels!")
+          $window.location.href = "/delivery/success"
+
         })
         .error(function (data, status) {
             console.log(data);
@@ -77,6 +78,8 @@
 
     //Posts an order from a customer. Doesn't update fuel total
     $scope.postOrderFromCustomer = function(){
+
+      console.log($scope.firstName)
 
       $http.post('/customer/orders',
           {
@@ -97,19 +100,11 @@
     }, function (res) {
         console.log("error" + res.type)
     });
-    console.log("outside")
   }
 
 
     //updates the status of the order, and the fuel total
     $scope.updateStatus = function(data){
-
-    //  console.log("order id first" + orderId)
-      console.log("am: "+ data.amountEdit)
-      console.log("price " + data.priceEdit)
-      console.log("id " + data._id)
-      console.log("type" + data.type)
-
 
       $http.post('/delivery/orders',
           {
@@ -127,7 +122,6 @@
 
           fuelId =  $scope.checkFuelType(data.type)
 
-        //  console.log(fuelId)
       $http.post('/fuels/delivery',
               {
                 id: fuelId,
@@ -156,6 +150,7 @@
             $scope.fuelID = "58f556c7cee2624033ea93b3"
           }
 
+
           // Place new shipment in database
           $http.post('/inventory/order',
               {
@@ -180,21 +175,52 @@
                 amount: $scope.amount,
                 })
          .success(function (result) {
-              console.log("updated fuels!")
+           $window.location.href = "/inventory/success"
           })
           .error(function (data, status) {
               console.log(data);
           });
     }
 
-    $http.get('/fuels')
-    .success(function(response){
-      console.log("success")
-        $scope.fuelData = response;
-    })
-    .error(function(data,status){
-    console.log('error!');
-    console.log(data);
-  });
+
+        $http.get('/fuels')
+        .success(function(response){
+            $scope.fuelData = response;
+        })
+        .error(function(data,status){
+        console.log('error!');
+        console.log(data);
+      });
+
+       $scope.queryDates = function(){
+
+         var config = {
+           params: {
+             start: $scope.sDate,
+             end: $scope.eDate
+           }
+         }
+
+         $http.get('/fuelsolddata', config)
+         .success(function(response){
+               $scope.fuelSoldData = response;
+           })
+        .error(function(response){
+          console.log("error")
+        })
+
+        $http.get('/profitdata', config)
+        .success(function(response){
+              $scope.profitData = response;
+          })
+       .error(function(response){
+         console.log("error")
+       })
+         }
+
+    $http.get('/pendingorderdata').success(function(response){
+          $scope.pendingOrderData = response;
+      });
+
 
   }]);
